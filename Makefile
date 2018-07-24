@@ -1,4 +1,4 @@
-NAME = RTv1
+NAME = rtv1
 
 SRCS = main.c		\
 

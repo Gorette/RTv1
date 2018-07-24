@@ -15,6 +15,19 @@
 
 # include "../libft/includes/libft.h"
 # include "../mlx/mlx.h"
+# include <math.h>
+# include <pthread.h>
+
+typedef struct		s_obj
+{
+	char			*type;
+	float			x;
+	float			y;
+	float			z;
+	float			rayon;
+	float			height;
+	float			width;
+}					t_obj;
 
 typedef struct		s_img
 {
@@ -32,6 +45,7 @@ typedef struct		s_data
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_img			*img;
+	t_obj			*obj;
 	float			s_xmin;
 	float			s_ymin;
 	float			s_xmax;

@@ -23,6 +23,28 @@ void		ft_fail(char *str, t_data *data)
 	exit(0);
 }
 
+void		init_img(t_data *data)
+{
+	if (!(data->img = (t_img *)malloc(sizeof(t_img) * 1)))
+		ft_fail("Error: Could not allocate memory", NULL);
+	data->img->width = LA;
+	data->img->height = HA;
+	if (!(data->img->ptr = mlx_new_image(data->mlx_ptr, LA, HA)))
+		ft_fail("Error: cant create image.", NULL);
+	if (!(data->img->str = mlx_get_data_addr(data->img->ptr, &data->img->bpp,
+		&data->img->s_l, &data->img->endian)))
+		ft_fail("Error: cant create image.", NULL);
+}
+
+void		init_data(t_data *data)
+{
+	if (!(data->mlx_ptr = mlx_init()))
+		ft_fail("Error: Connection failed.", NULL);
+	if (!(data->win_ptr = mlx_new_window(data->mlx_ptr, LA, HA, "rtv1")))
+		ft_fail("Error: Unable to create window.", NULL);
+	init_img(data);
+}
+
 t_data		*new_list(void)
 {
 	t_data	*new;
@@ -39,6 +61,8 @@ int			main(void)
 	t_data	*data;
 
 	data = new_list();
+	init_data(data);
 	ft_putstr("ca fonctionne.\n");
+	mlx_loop(data->mlx_ptr);
 	return (0);
 }

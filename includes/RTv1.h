@@ -18,12 +18,16 @@
 # include <math.h>
 # include <pthread.h>
 
+# define LA 896
+# define HA 504
+
 typedef struct		s_obj
 {
 	char			*type;
 	float			x;
 	float			y;
 	float			z;
+	int				id;
 	float			rayon;
 	float			height;
 	float			width;

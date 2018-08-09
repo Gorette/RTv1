@@ -16,8 +16,6 @@ void		ft_fail(char *str, t_data *data)
 {
 	ft_putstr_fd(str, 2);
 	ft_putchar('\n');
-	ft_putstr_fd("State: ", 2);
-	ft_putstr_fd("rtv1 is now quitting due to an error.\n", 2);
 	if (data)
 		exit(0);
 	exit(0);
@@ -34,6 +32,7 @@ void		init_img(t_data *data)
 	if (!(data->img->str = mlx_get_data_addr(data->img->ptr, &data->img->bpp,
 		&data->img->s_l, &data->img->endian)))
 		ft_fail("Error: cant create image.", NULL);
+	data->img->bpp /= 8;
 }
 
 void		init_data(t_data *data)
@@ -45,7 +44,7 @@ void		init_data(t_data *data)
 	init_img(data);
 }
 
-t_data		*new_list(void)
+t_data		*new_data(void)
 {
 	t_data	*new;
 
@@ -56,12 +55,15 @@ t_data		*new_list(void)
 	return (new);
 }
 
-int			main(void)
+int			main(int argc, char **argv)
 {
 	t_data	*data;
 
-	data = new_list();
+	if (argc < 2)
+		ft_fail("Usage: rtv1 input_file", NULL);
+	data = new_data();
 	init_data(data);
+	start_reading();
 	ft_putstr("ca fonctionne.\n");
 	mlx_loop(data->mlx_ptr);
 	return (0);

@@ -3,95 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ceugene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/08 15:34:03 by axbal             #+#    #+#             */
-/*   Updated: 2018/03/10 18:31:26 by axbal            ###   ########.fr       */
+/*   Created: 2018/03/12 12:19:58 by ceugene           #+#    #+#             */
+/*   Updated: 2018/03/12 12:38:14 by ceugene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*cat_buff(char *save, char *buf)
+int		ft_stock_up(char **stock)
 {
-	char	*tmp;
+	char	*copy;
 
-	tmp = ft_strdup(save);
-	free(save);
-	if (!(save = (char *)malloc(sizeof(char)
-		* (ft_strlen(tmp) + ft_strlen(buf) + 1))))
-		return (NULL);
-	save = ft_strcpy(save, tmp);
-	free(tmp);
-	save = ft_strcat(save, buf);
-	return (save);
-}
-
-int		find_line(char *str)
-{
-	int		i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i] != '\0' && str[i] != '\n')
-		i++;
-	if (str[i] == '\n')
-		return (1);
-	return (0);
-}
-
-int		fill_line(char **save, char **line, int mode)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while ((*save)[i] != '\n' && (*save)[i] != '\0')
-		i++;
-	if (!(*line = (char *)malloc(sizeof(char) * (i + 1))))
-		return (-1);
-	*line = ft_strncpy(*line, *save, i);
-	(*line)[i] = '\0';
-	if (mode == 1 || mode == 2)
+	if (*stock == NULL)
 	{
-		tmp = ft_strdup(*save + i + 1);
-		ft_bzero(*save, ft_strlen(*save));
-		*save = ft_strcpy(*save, tmp);
-		free(tmp);
-	}
-	if (mode == 2 || mode == 3)
-		ft_bzero(*save, ft_strlen(*save));
-	if (mode == 3)
-		*line = "";
-	if (mode != 3)
+		if (!(*stock = ft_strnew(BUFF_SIZE)))
+			return (-1);
 		return (1);
-	return (0);
+	}
+	if (!(copy = ft_strdup(*stock)))
+		return (-1);
+	free(*stock);
+	if (!(*stock = ft_strnew(ft_strlen(copy) + BUFF_SIZE)))
+		return (-1);
+	ft_strncpy(*stock, copy, ft_strlen(copy));
+	free(copy);
+	return (1);
+}
+
+int		ft_fill_line(char **line, char **stok, int select, int select2)
+{
+	free(*line);
+	if (ft_memchr(*stok, '\n', ft_strlen(*stok)))
+	{
+		while ((*stok)[select] && ((*stok)[select] != '\n'))
+			select++;
+		if (!(*line = ft_strdup(*stok)))
+			return (-1);
+		(*line)[select] = '\0';
+		while ((*stok)[select++])
+		{
+			(*stok)[select2] = (*stok)[select];
+			select2++;
+		}
+		while (++select2 != select)
+			(*stok)[select2] = '\0';
+		return (1);
+	}
+	else if (!(*line = ft_strdup(*stok)))
+		return (-1);
+	ft_bzero(*stok, ft_strlen(*stok));
+	return (1);
 }
 
 int		get_next_line(const int fd, char **line)
 {
-	char			*buf;
-	static char		*save;
+	static char		*stock;
+	char			*lu;
 	int				ret;
-	int				stop;
 
-	if ((fd < 3 && fd != 0) || !line
-		|| !(buf = (char *)malloc(sizeof(char) * BUFF_SIZE + 1)))
+	if ((fd != 0 && fd < 3) || BUFF_SIZE < 1 || !&(*line)
+		|| !(*line = ft_strnew(BUFF_SIZE)))
 		return (-1);
-	stop = find_line(save);
-	while (stop == 0 && (ret = read(fd, buf, BUFF_SIZE)) > 0)
+	while ((lu = ft_strnew(BUFF_SIZE))
+		&& (ret = read(fd, lu, BUFF_SIZE)) > 0)
 	{
-		buf[ret] = '\0';
-		save = save ? cat_buff(save, buf) : ft_strdup(buf);
-		stop = find_line(save);
+		lu[ret] = '\0';
+		if (!(ft_stock_up(&stock)))
+			return (-1);
+		ft_strncat(stock, lu, ret);
+		free(lu);
+		if (ft_memchr(stock, '\n', ft_strlen(stock)))
+			return (ft_fill_line(line, &stock, 0, 0));
 	}
-	free(buf);
-	if (ret == -1)
+	if (ret < 0 || !(lu))
 		return (-1);
-	else if (stop == 1)
-		return (fill_line(&save, line, 1));
-	else if (ft_strlen(save) > 0)
-		return (fill_line(&save, line, 2));
-	return (fill_line(&save, line, 3));
+	free(lu);
+	if (stock && ft_strlen(stock) > 0)
+		return (ft_fill_line(line, &stock, 0, 0));
+	free(*line);
+//	ft_bzero(*line, BUFF_SIZE);
+	return (0);
 }

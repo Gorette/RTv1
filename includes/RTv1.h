@@ -17,6 +17,7 @@
 # include "../mlx/mlx.h"
 # include <math.h>
 # include <pthread.h>
+# include <fcntl.h>
 
 # define LA 896
 # define HA 504

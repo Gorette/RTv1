@@ -55,6 +55,53 @@ t_data		*new_data(void)
 	return (new);
 }
 
+int		ft_increase_file(char **file, char *line)
+{
+	char	*copy;
+
+	if (*file == NULL)
+	{
+		if (!(*file = ft_strnew(ft_strlen(line))))
+			return (-1);
+		return (1);
+	}
+	if (!(copy = ft_strdup(*file)))
+		return (-1);
+	free(*file);
+	if (!(*file = ft_strnew(ft_strlen(copy) + ft_strlen(line))))
+		return (-1);
+	ft_strncpy(*file, copy, ft_strlen(copy));
+	ft_strcat(*file, line);
+	free(copy);
+	return (1);
+}
+
+void		start_reading(t_data *data, char *str)
+{
+	int		fd;
+	char	*file;
+	char	*line;
+	int		ret;
+
+	fd = open(str, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("Error: No file '", 2);
+		ft_putstr_fd(str, 2);
+		ft_fail("' found.", data);
+	}
+	file = NULL;
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		if (ft_increase_file(&file, line) == -1)
+			ft_fail("Error: An error occurred.", data);
+	}
+	if (ft_strlen(file) == 0)
+		ft_fail("Error: File is empty.", data);
+	if (ret == -1 || ft_strlen(file) > (2048 * 80))
+		ft_fail("Error: File is too big or is a directory.", data);
+}
+
 int			main(int argc, char **argv)
 {
 	t_data	*data;
@@ -63,7 +110,7 @@ int			main(int argc, char **argv)
 		ft_fail("Usage: rtv1 input_file", NULL);
 	data = new_data();
 	init_data(data);
-	start_reading();
+	start_reading(data, argv[1]);
 	ft_putstr("ca fonctionne.\n");
 	mlx_loop(data->mlx_ptr);
 	return (0);

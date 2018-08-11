@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:10:49 by axbal             #+#    #+#             */
-/*   Updated: 2018/07/24 12:11:57 by axbal            ###   ########.fr       */
+/*   Updated: 2018/08/11 22:10:15 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ char		*start_reading(char *str)
 			ft_fail("Error: An error occurred.", NULL);
 	}
 	close(fd);
-	if (ret < -1 || ft_strlen(file) >= (163840))
+	if (ret <= -1 || (file && ft_strlen(file) >= (163840)))
 		ft_fail("Error: File is too big or is a directory.", NULL);
-	if (ft_strlen(file) == 0)
+	if (!file || ft_strlen(file) == 0)
 		ft_fail("Error: File is empty.", NULL);
 	return (file);
 }

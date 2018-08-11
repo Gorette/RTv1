@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:05:33 by axbal             #+#    #+#             */
-/*   Updated: 2018/07/24 12:33:50 by axbal            ###   ########.fr       */
+/*   Updated: 2018/08/11 22:01:15 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,18 @@
 typedef struct		s_obj
 {
 	char			*type;
-	float			x;
-	float			y;
-	float			z;
-	int				id;
-	float			rayon;
+	float			px;
+	float			py;
+	float			pz;
+	float			radius;
 	float			height;
-	float			width;
+	float			vx;
+	float			vy;
+	float			vz;
+	int				r;
+	int				g;
+	int				b;
+	struct s_obj	*next;
 }					t_obj;
 
 typedef struct		s_img
@@ -50,7 +55,7 @@ typedef struct		s_data
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_img			*img;
-	t_obj			*obj;
+	t_obj			**obj;
 	float			s_xmin;
 	float			s_ymin;
 	float			s_xmax;

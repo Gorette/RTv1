@@ -46,6 +46,7 @@ t_data		*new_data(void)
 		ft_fail("Error: Could not allocate memory", NULL);
 	new->img = NULL;
 	new->obj = NULL;
+	new->cam = NULL;
 	if (!(new->mlx_ptr = mlx_init()))
 		ft_fail("Error: Connection failed.", NULL);
 	if (!(new->win_ptr = mlx_new_window(new->mlx_ptr, LA, HA, "rtv1")))
@@ -120,6 +121,7 @@ int			main(int argc, char **argv)
 		ft_fail("Usage: rtv1 input_file", NULL);
 	data = new_data();
 	file = start_reading(argv[1]);
+	read_file(data, file);
 	ft_putstr("ca fonctionne.\n");
 	let_mlx_loop(data);
 	return (0);

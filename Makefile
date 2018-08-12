@@ -1,6 +1,8 @@
 NAME = rtv1
 
-SRCS = main.c		\
+SRCS =	main.c		\
+		objects.c	\
+		reading.c	\
 
 SRCO = $(SRCS:.c=.o)
 

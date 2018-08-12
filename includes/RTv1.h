@@ -22,6 +22,16 @@
 # define LA 896
 # define HA 504
 
+typedef struct		s_cam
+{
+	float			px;
+	float			py;
+	float			pz;
+	float			vx;
+	float			vy;
+	float			vz;
+}					t_cam;
+
 typedef struct		s_obj
 {
 	char			*type;
@@ -56,10 +66,14 @@ typedef struct		s_data
 	void			*win_ptr;
 	t_img			*img;
 	t_obj			**obj;
+	t_cam			*cam;
 	float			s_xmin;
 	float			s_ymin;
 	float			s_xmax;
 	float			s_ymax;
 }					t_data;
 
+
+void	ft_fail(char *str, t_data *data);
+int		read_file(t_data *data, char *file);
 #endif

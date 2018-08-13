@@ -54,7 +54,41 @@ int		search_pos_cam(t_cam *cam, char *f, int s)
 	cam->px = x;
 	cam->py = y;
 	cam->pz = z;
-	return (1);
+	return (s);
+}
+
+int		search_dir_cam(t_cam *cam, char *f, int s)
+{
+	int		x;
+	int		y;
+	int		z;
+	int		result;
+	int		levier;
+
+	levier = 0;
+	while (f[s] && f[s] != ')')
+	{
+		if ((ft_isdigit(f[s]) && ((f[s - 1] == ','
+			|| f[s - 1] == ' ' || f[s - 1] == ')') || f[s - 1] == '+'))
+				|| (f[s] == '-' && f[s + 1] && ft_isdigit(f[s + 1])))
+		{
+			result = atoi(f + s);
+			if (levier == 0)
+				x = result;
+			else if (levier == 1)
+				y = result;
+			else if (levier == 2)
+				z = result;
+			levier++;
+		}
+		s++;
+	}
+	if (!(f[s]) || levier != 2 || f[s] != ')')
+		return (-1);
+	cam->vx = x;
+	cam->vy = y;
+	cam->vz = z;
+	return (s);
 }
 
 int		read_camera(t_data *data, char *file, int select)
@@ -66,8 +100,6 @@ int		read_camera(t_data *data, char *file, int select)
 
 	pos = 0;
 	dir = 0;
-	if (data->cam != NULL)
-		ft_fail("Error: Several cameras detected.", data);
 	if (!(new = (t_cam *)malloc(sizeof(t_cam) * 1)))
 		ft_fail("Error: Could not allocate memory.", data);
 	while (file[select] && file[select] != '}')
@@ -80,15 +112,19 @@ int		read_camera(t_data *data, char *file, int select)
 			select += ft_strlen(word);
 			if (!(ft_strcmp(word, "pos")))
 				pos = search_pos_cam(new, file, select);
-//			else
-//				dir = search_dir(data, new, file, select);
+			else
+				dir = search_dir_cam(new, file, select);
 			free(word);
 		}
 		select++;
 	}
-	if (pos == 1)
+	if (pos > 0)
 		ft_putstr("camera pos OK\n");
-	if (pos == 1 && dir == 1)
+	if (dir > 0)
+		ft_putstr("camera dir OK\n");
+	if (pos > 0 && dir > 0 && data->cam != NULL)
+		ft_fail("Error: Several valid cameras detected.", data);
+	if (pos > 0 && dir > 0)
 		data->cam = new;
 	else
 		free(new);
@@ -126,8 +162,6 @@ int		read_file(t_data *data, char *file)
 			select += ft_strlen(object);
 			if ((read_new_object(data, object, file, select)) > 0)
 			{
-				ft_putstr(object);
-				ft_putchar('\n');
 			}
 			free(object);
 		}

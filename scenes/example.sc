@@ -1,6 +1,6 @@
 camera {
 	pos(5,7,2)
-	dir(x,y,z)
+	dir(3,2,1)
 }
 
 object {
@@ -34,4 +34,8 @@ object {
 
 light {
 	pos(x,y,z)
+}
+
+camera {
+	pos(2,2,2)dir(32,1,4)
 }

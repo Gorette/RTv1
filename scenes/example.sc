@@ -3,14 +3,14 @@ camera {
 	dir(x,y,z)
 }
 
-objet {
+object {
 	type(sphere)
 	pos(x,y,z)
 	radius(x)
 	color(r,g,b)
 }
 
-objet {
+object {
 	type(cylinder)
 	pos(x,y,z)
 	radius(x)
@@ -18,7 +18,7 @@ objet {
 	vector(x,y,z)
 }
 
-objet {
+object {
 	type(cone)
 	pos(x,y,z)
 	radius(x)
@@ -26,7 +26,7 @@ objet {
 	vector(x,y,z)
 }
 
-objet {
+object {
 	type(plane)
 	pos(x,y,z)
 	vector(x,y,z)

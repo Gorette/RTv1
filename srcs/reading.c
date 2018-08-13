@@ -23,27 +23,72 @@ char	*word_return(char *str, int select)
 	return (word);
 }
 
+int		search_pos_cam(t_cam *cam, char *f, int s)
+{
+	int		x;
+	int		y;
+	int		z;
+	int		result;
+	int		levier;
+
+	levier = 0;
+	while (f[s] && f[s] != ')')
+	{
+		if ((ft_isdigit(f[s]) && (f[s - 1] == ','
+			|| f[s - 1] == ' ' || f[s - 1] == ')')) || (f[s] == '-'
+				&& f[s + 1] && ft_isdigit(f[s + 1])))
+		{
+			result = atoi(f + s);
+			if (levier == 0)
+				x = result;
+			else if (levier == 1)
+				y = result;
+			else if (levier == 2)
+				z = result;
+			levier++;
+		}
+		s++;
+	}
+	if (levier != 2)
+		return (-1);
+	cam->px = x;
+	cam->py = y;
+	cam->pz = z;
+	return (1);
+}
+
 int		read_camera(t_data *data, char *file, int select)
 {
 	t_cam	*new;
 	char	*word;
 	int		pos;
-	int		vector;
+	int		dir;
 
 	pos = 0;
-	vector = 0;
+	dir = 0;
 	if (data->cam != NULL)
 		ft_fail("Error: Several cameras detected.", data);
+	if (!(new = (t_cam *)malloc(sizeof(t_cam) * 1)))
+		ft_fail("Error: Could not allocate memory.", data);
 	while (file[select] && file[select] != '}')
 	{
 		word = NULL;
-		if (ft_isalpha(file[select]))
-			word = word_return(file, select)
+		if (ft_isalpha(file[select])
+			&& (!(ft_strcmp(word_return(file, select), "pos"))
+				|| !(ft_strcmp(word_return(file, select), "dir"))))
+			word = word_return(file, select);
 		if (word != NULL)
-			read_word(word);
+		{
+			select += ft_strlen(word);
+			if (!(ft_strcmp(word, "pos")))
+				pos = search_pos_cam(new, file, select);
+//			else
+//				dir = search_dir(data, new, file, select);
+			free(word);
+		}
 		select++;
 	}
-	if (pos && vector)
+	if (pos == 1 && dir == 1)
 		data->cam = new;
 	else
 		free(new);
@@ -77,7 +122,7 @@ int		read_file(t_data *data, char *file)
 		if (object != NULL)
 		{
 			select += ft_strlen(object);
-			if ((select = read_new_object(data, object, file, select)) > 0)
+			if ((read_new_object(data, object, file, select)) > 0)
 			{
 				ft_putstr(object);
 				ft_putchar('\n');

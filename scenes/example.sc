@@ -1,5 +1,5 @@
 camera {
-	pos(x,y,z)
+	pos(5,7,2)
 	dir(x,y,z)
 }
 

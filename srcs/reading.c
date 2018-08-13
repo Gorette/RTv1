@@ -34,9 +34,9 @@ int		search_pos_cam(t_cam *cam, char *f, int s)
 	levier = 0;
 	while (f[s] && f[s] != ')')
 	{
-		if ((ft_isdigit(f[s]) && (f[s - 1] == ','
-			|| f[s - 1] == ' ' || f[s - 1] == ')')) || (f[s] == '-'
-				&& f[s + 1] && ft_isdigit(f[s + 1])))
+		if ((ft_isdigit(f[s]) && ((f[s - 1] == ','
+			|| f[s - 1] == ' ' || f[s - 1] == ')') || f[s - 1] == '+'))
+				|| (f[s] == '-' && f[s + 1] && ft_isdigit(f[s + 1])))
 		{
 			result = atoi(f + s);
 			if (levier == 0)
@@ -49,7 +49,7 @@ int		search_pos_cam(t_cam *cam, char *f, int s)
 		}
 		s++;
 	}
-	if (levier != 2)
+	if (!(f[s]) || levier != 2 || f[s] != ')')
 		return (-1);
 	cam->px = x;
 	cam->py = y;
@@ -73,9 +73,7 @@ int		read_camera(t_data *data, char *file, int select)
 	while (file[select] && file[select] != '}')
 	{
 		word = NULL;
-		if (ft_isalpha(file[select])
-			&& (!(ft_strcmp(word_return(file, select), "pos"))
-				|| !(ft_strcmp(word_return(file, select), "dir"))))
+		if (ft_isalpha(file[select]))
 			word = word_return(file, select);
 		if (word != NULL)
 		{
@@ -88,6 +86,8 @@ int		read_camera(t_data *data, char *file, int select)
 		}
 		select++;
 	}
+	if (pos == 1)
+		ft_putstr("camera pos OK\n");
 	if (pos == 1 && dir == 1)
 		data->cam = new;
 	else
@@ -97,6 +97,8 @@ int		read_camera(t_data *data, char *file, int select)
 
 int		read_new_object(t_data *data, char *ob, char *file, int select)
 {
+	if (!(file[select]) || !(file[select + 1]))
+		return (0);
 	if (ft_strcmp(ob, "object") == 0)
 		return (1);
 	else if (ft_strcmp(ob, "light") == 0)

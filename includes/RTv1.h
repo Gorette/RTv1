@@ -76,4 +76,6 @@ typedef struct		s_data
 
 void	ft_fail(char *str, t_data *data);
 int		read_file(t_data *data, char *file);
+float	ft_atof(const char *str);
+
 #endif

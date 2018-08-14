@@ -1,4 +1,5 @@
 #include "RTv1.h"
+#include <stdio.h>
 
 char	*word_return(char *str, int select)
 {
@@ -25,20 +26,20 @@ char	*word_return(char *str, int select)
 
 int		search_pos_cam(t_cam *cam, char *f, int s)
 {
-	int		x;
-	int		y;
-	int		z;
-	int		result;
+	float	x;
+	float	y;
+	float	z;
+	float	result;
 	int		levier;
 
 	levier = 0;
 	while (f[s] && f[s] != ')')
 	{
 		if ((ft_isdigit(f[s]) && ((f[s - 1] == ','
-			|| f[s - 1] == ' ' || f[s - 1] == ')') || f[s - 1] == '+'))
+			|| f[s - 1] == ' ' || f[s - 1] == '(') || f[s - 1] == '+'))
 				|| (f[s] == '-' && f[s + 1] && ft_isdigit(f[s + 1])))
 		{
-			result = atoi(f + s);
+			result = ft_atof(f + s);
 			if (levier == 0)
 				x = result;
 			else if (levier == 1)
@@ -49,30 +50,31 @@ int		search_pos_cam(t_cam *cam, char *f, int s)
 		}
 		s++;
 	}
-	if (!(f[s]) || levier != 2 || f[s] != ')')
+	if (!(f[s]) || levier != 3 || f[s] != ')')
 		return (-1);
 	cam->px = x;
 	cam->py = y;
 	cam->pz = z;
+	printf("x = %f, y = %f, z = %f\n", cam->px, cam->py, cam->pz);
 	return (s);
 }
 
 int		search_dir_cam(t_cam *cam, char *f, int s)
 {
-	int		x;
-	int		y;
-	int		z;
-	int		result;
+	float	x;
+	float	y;
+	float	z;
+	float	result;
 	int		levier;
 
 	levier = 0;
 	while (f[s] && f[s] != ')')
 	{
 		if ((ft_isdigit(f[s]) && ((f[s - 1] == ','
-			|| f[s - 1] == ' ' || f[s - 1] == ')') || f[s - 1] == '+'))
+			|| f[s - 1] == ' ' || f[s - 1] == '(') || f[s - 1] == '+'))
 				|| (f[s] == '-' && f[s + 1] && ft_isdigit(f[s + 1])))
 		{
-			result = atoi(f + s);
+			result = ft_atof(f + s);
 			if (levier == 0)
 				x = result;
 			else if (levier == 1)
@@ -83,7 +85,7 @@ int		search_dir_cam(t_cam *cam, char *f, int s)
 		}
 		s++;
 	}
-	if (!(f[s]) || levier != 2 || f[s] != ')')
+	if (!(f[s]) || levier != 3 || f[s] != ')')
 		return (-1);
 	cam->vx = x;
 	cam->vy = y;
@@ -118,10 +120,6 @@ int		read_camera(t_data *data, char *file, int select)
 		}
 		select++;
 	}
-	if (pos > 0)
-		ft_putstr("camera pos OK\n");
-	if (dir > 0)
-		ft_putstr("camera dir OK\n");
 	if (pos > 0 && dir > 0 && data->cam != NULL)
 		ft_fail("Error: Several valid cameras detected.", data);
 	if (pos > 0 && dir > 0)

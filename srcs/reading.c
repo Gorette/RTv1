@@ -24,15 +24,15 @@ char	*word_return(char *str, int select)
 	return (word);
 }
 
-int		search_pos_cam(t_cam *cam, char *f, int s)
+float	*three_values_tab(char *f, int s)
 {
-	float	x;
-	float	y;
-	float	z;
-	float	result;
+	float	*tab;
 	int		levier;
+	float	result;
 
 	levier = 0;
+	if (!(tab = (float *)malloc(sizeof(float) * 5)))
+		ft_fail("Error: Could not allocate memory.", NULL);
 	while (f[s] && f[s] != ')')
 	{
 		if ((ft_isdigit(f[s]) && ((f[s - 1] == ','
@@ -40,57 +40,54 @@ int		search_pos_cam(t_cam *cam, char *f, int s)
 				|| (f[s] == '-' && f[s + 1] && ft_isdigit(f[s + 1])))
 		{
 			result = ft_atof(f + s);
-			if (levier == 0)
-				x = result;
-			else if (levier == 1)
-				y = result;
-			else if (levier == 2)
-				z = result;
+			if (levier < 3)
+				tab[levier] = result;
 			levier++;
 		}
 		s++;
 	}
-	if (!(f[s]) || levier != 3 || f[s] != ')')
+	tab[3] = levier;
+	tab[4] = s;
+	return (tab);
+}
+
+int		search_pos_cam(t_cam *cam, char *f, int s)
+{
+	float	*tab;
+
+	tab = three_values_tab(f, s);
+	s = (int)tab[4];
+	printf("tab3 : %f\n", tab[3]);
+	if (!(f[s]) || (int)tab[3] != 3 || f[s] != ')')
+	{
+		free(tab);
 		return (-1);
-	cam->px = x;
-	cam->py = y;
-	cam->pz = z;
+	}
+	cam->px = tab[0];
+	cam->py = tab[1];
+	cam->pz = tab[2];
+	free(tab);
 	printf("x = %f, y = %f, z = %f\n", cam->px, cam->py, cam->pz);
-	return (s);
+	return (1);
 }
 
 int		search_dir_cam(t_cam *cam, char *f, int s)
 {
-	float	x;
-	float	y;
-	float	z;
-	float	result;
-	int		levier;
+	float	*tab;
 
-	levier = 0;
-	while (f[s] && f[s] != ')')
+	tab = three_values_tab(f, s);
+	s = (int)tab[4];
+	printf("tab3 : %f\n", tab[3]);
+	if (!(f[s]) || (int)tab[3] != 3 || f[s] != ')')
 	{
-		if ((ft_isdigit(f[s]) && ((f[s - 1] == ','
-			|| f[s - 1] == ' ' || f[s - 1] == '(') || f[s - 1] == '+'))
-				|| (f[s] == '-' && f[s + 1] && ft_isdigit(f[s + 1])))
-		{
-			result = ft_atof(f + s);
-			if (levier == 0)
-				x = result;
-			else if (levier == 1)
-				y = result;
-			else if (levier == 2)
-				z = result;
-			levier++;
-		}
-		s++;
-	}
-	if (!(f[s]) || levier != 3 || f[s] != ')')
+		free(tab);
 		return (-1);
-	cam->vx = x;
-	cam->vy = y;
-	cam->vz = z;
-	return (s);
+	}
+	cam->vx = tab[0];
+	cam->vy = tab[1];
+	cam->vz = tab[2];
+	free(tab);
+	return (1);
 }
 
 int		read_camera(t_data *data, char *file, int select)

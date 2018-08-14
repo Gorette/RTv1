@@ -2,10 +2,10 @@
 
 float					ft_atof(const char *str)
 {
-	int			s;
-	int			virgule;
-	float		result;
-	int			levier;
+	int		s;
+	int		virgule;
+	float	result;
+	int		levier;
 
 	s = 0;
 	result = 0;

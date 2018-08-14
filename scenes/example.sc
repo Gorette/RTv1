@@ -35,7 +35,3 @@ object {
 light {
 	pos(x,y,z)
 }
-
-camera {
-	pos(2.2,2,2)dir(32,1,4)
-}

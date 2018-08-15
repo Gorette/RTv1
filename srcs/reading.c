@@ -133,7 +133,7 @@ int		read_new_object(t_data *data, char *ob, char *file, int select)
 	if (ft_strcmp(ob, "object") == 0)
 		return (1);
 	else if (ft_strcmp(ob, "light") == 0)
-		return (2);
+		return (read_light(data, file, select));
 	else if (ft_strcmp(ob, "camera") == 0)
 		return (read_camera(data, file, select));
 	return (0);

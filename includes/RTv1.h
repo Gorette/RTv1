@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:05:33 by axbal             #+#    #+#             */
-/*   Updated: 2018/08/11 22:01:15 by axbal            ###   ########.fr       */
+/*   Updated: 2018/08/15 10:54:34 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ typedef struct		s_cam
 	float			vy;
 	float			vz;
 }					t_cam;
+
+typedef struct		s_light
+{
+	float			px;
+	float			py;
+	float			pz;
+}					t_light;
 
 typedef struct		s_obj
 {
@@ -66,6 +73,7 @@ typedef struct		s_data
 	void			*win_ptr;
 	t_img			*img;
 	t_obj			**obj;
+	t_light			*light;
 	t_cam			*cam;
 	float			s_xmin;
 	float			s_ymin;
@@ -77,5 +85,7 @@ typedef struct		s_data
 void	ft_fail(char *str, t_data *data);
 int		read_file(t_data *data, char *file);
 float	ft_atof(const char *str);
+float	*three_values_tab(char *f, int s);
+int		read_light(t_data *data, char *file, int select);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:10:49 by axbal             #+#    #+#             */
-/*   Updated: 2018/08/11 22:10:15 by axbal            ###   ########.fr       */
+/*   Updated: 2018/08/15 10:57:38 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,13 @@ int			main(int argc, char **argv)
 	file = start_reading(argv[1]);
 	read_file(data, file);
 	ft_putstr("ca fonctionne.\n");
+	ft_putstr("light x : ");
+	ft_putnbr(data->light->px);
+	ft_putstr("\nlight y : ");
+	ft_putnbr(data->light->py);
+	ft_putstr("\nlight z : ");
+	ft_putnbr(data->light->pz);
+	ft_putstr("\n");
 	let_mlx_loop(data);
 	return (0);
 }

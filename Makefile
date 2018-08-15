@@ -5,6 +5,7 @@ SRCS =	main.c					\
 		reading.c				\
 		reading_utilitaries.c	\
 		read_light.c			\
+		read_cam.c				\
 
 SRCO = $(SRCS:.c=.o)
 

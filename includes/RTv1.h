@@ -87,5 +87,7 @@ int		read_file(t_data *data, char *file);
 float	ft_atof(const char *str);
 float	*three_values_tab(char *f, int s);
 int		read_light(t_data *data, char *file, int select);
+char	*word_return(char *str, int select);
+int		read_camera(t_data *data, char *file, int select);
 
 #endif

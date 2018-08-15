@@ -1,5 +1,4 @@
 #include "RTv1.h"
-#include <stdio.h>
 
 char	*word_return(char *str, int select)
 {
@@ -49,81 +48,6 @@ float	*three_values_tab(char *f, int s)
 	tab[3] = levier;
 	tab[4] = s;
 	return (tab);
-}
-
-int		search_pos_cam(t_cam *cam, char *f, int s)
-{
-	float	*tab;
-
-	tab = three_values_tab(f, s);
-	s = (int)tab[4];
-	printf("tab3 : %f\n", tab[3]);
-	if (!(f[s]) || (int)tab[3] != 3 || f[s] != ')')
-	{
-		free(tab);
-		return (-1);
-	}
-	cam->px = tab[0];
-	cam->py = tab[1];
-	cam->pz = tab[2];
-	free(tab);
-	printf("x = %f, y = %f, z = %f\n", cam->px, cam->py, cam->pz);
-	return (1);
-}
-
-int		search_dir_cam(t_cam *cam, char *f, int s)
-{
-	float	*tab;
-
-	tab = three_values_tab(f, s);
-	s = (int)tab[4];
-	printf("tab3 : %f\n", tab[3]);
-	if (!(f[s]) || (int)tab[3] != 3 || f[s] != ')')
-	{
-		free(tab);
-		return (-1);
-	}
-	cam->vx = tab[0];
-	cam->vy = tab[1];
-	cam->vz = tab[2];
-	free(tab);
-	return (1);
-}
-
-int		read_camera(t_data *data, char *file, int select)
-{
-	t_cam	*new;
-	char	*word;
-	int		pos;
-	int		dir;
-
-	pos = 0;
-	dir = 0;
-	if (!(new = (t_cam *)malloc(sizeof(t_cam) * 1)))
-		ft_fail("Error: Could not allocate memory.", data);
-	while (file[select] && file[select] != '}')
-	{
-		word = NULL;
-		if (ft_isalpha(file[select]))
-			word = word_return(file, select);
-		if (word != NULL)
-		{
-			select += ft_strlen(word);
-			if (!(ft_strcmp(word, "pos")))
-				pos = search_pos_cam(new, file, select);
-			else
-				dir = search_dir_cam(new, file, select);
-			free(word);
-		}
-		select++;
-	}
-	if (pos > 0 && dir > 0 && data->cam != NULL)
-		ft_fail("Error: Several valid cameras detected.", data);
-	if (pos > 0 && dir > 0)
-		data->cam = new;
-	else
-		free(new);
-	return (select);
 }
 
 int		read_new_object(t_data *data, char *ob, char *file, int select)

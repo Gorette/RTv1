@@ -1,1 +1,1 @@
-camera pos 
+object { pos(

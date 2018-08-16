@@ -54,6 +54,11 @@ typedef struct		s_obj
 	int				g;
 	int				b;
 	struct s_obj	*next;
+	int				pos_c;
+	int				type_c;
+	int				radius_c;
+	int				height_c;
+	int				vector_c;
 }					t_obj;
 
 typedef struct		s_img
@@ -89,5 +94,6 @@ float	*three_values_tab(char *f, int s);
 int		read_light(t_data *data, char *file, int select);
 char	*word_return(char *str, int select);
 int		read_camera(t_data *data, char *file, int select);
+int		read_object(t_data *d, char *f, int s);
 
 #endif

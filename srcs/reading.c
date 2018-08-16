@@ -55,7 +55,7 @@ int		read_new_object(t_data *data, char *ob, char *file, int select)
 	if (!(file[select]) || !(file[select + 1]))
 		return (0);
 	if (ft_strcmp(ob, "object") == 0)
-		return (1);
+		return (read_object(data, file, select));
 	else if (ft_strcmp(ob, "light") == 0)
 		return (read_light(data, file, select));
 	else if (ft_strcmp(ob, "camera") == 0)

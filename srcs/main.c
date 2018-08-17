@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:10:49 by axbal             #+#    #+#             */
-/*   Updated: 2018/08/15 10:57:38 by axbal            ###   ########.fr       */
+/*   Updated: 2018/08/17 13:19:14 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ t_data		*new_data(void)
 	new->img = NULL;
 	new->obj = NULL;
 	new->cam = NULL;
+	new->light = NULL;
+	new->lights = 0;
+	new->objects = 0;
 	if (!(new->mlx_ptr = mlx_init()))
 		ft_fail("Error: Connection failed.", NULL);
 	if (!(new->win_ptr = mlx_new_window(new->mlx_ptr, LA, HA, "rtv1")))

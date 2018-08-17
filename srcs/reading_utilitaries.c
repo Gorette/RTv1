@@ -1,6 +1,6 @@
 #include "RTv1.h"
 
-float					ft_atof(const char *str)
+float	ft_atof(const char *str)
 {
 	int		s;
 	int		virgule;

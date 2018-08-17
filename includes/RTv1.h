@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:05:33 by axbal             #+#    #+#             */
-/*   Updated: 2018/08/15 10:54:34 by axbal            ###   ########.fr       */
+/*   Updated: 2018/08/17 13:18:29 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ typedef struct		s_data
 	void			*win_ptr;
 	t_img			*img;
 	t_obj			**obj;
-	t_light			*light;
+	t_light			**light;
 	t_cam			*cam;
+	int				lights;
+	int				objects;
 	float			s_xmin;
 	float			s_ymin;
 	float			s_xmax;

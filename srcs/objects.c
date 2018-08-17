@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:56:25 by axbal             #+#    #+#             */
-/*   Updated: 2018/08/11 22:05:02 by axbal            ###   ########.fr       */
+/*   Updated: 2018/08/17 13:40:40 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,23 @@
 
 void	add_obj(t_data *data, t_obj *obj)
 {
-	t_obj	**list;
-	t_obj	*current;
-	t_obj	*next;
+	t_obj	**tmp;
+	int		i;
 
-	list = data->obj;
-	current = *list;
-	next = current->next;
-	while (next)
+	i = 0;
+	if (!(tmp = (t_obj **)malloc(sizeof(t_obj *) * (data->objects + 1))))
+		ft_fail("Error: Could not allocate memory.", data);
+	while (i < data->objects)
 	{
-		current = next;
-		next = current->next;
+		tmp[i] = data->obj[i];
+		i++;
 	}
-	if (!current)
-		*list = obj;
-	else
-		current->next = obj;
+	tmp[i] = obj;
+	if (data->objects > 0)
+		free(data->obj);
+	data->obj = tmp;
+	data->objects++;
+	printf("L'objet de type %s a bien ete ajoute.\n", obj->type);
 }
 
 int		expected_result(t_obj *obj)
@@ -204,5 +205,6 @@ int		read_object(t_data *d, char *f, int s)
 		free(new);
 		return (0);
 	}
+	add_obj(d, new);
 	return (1);
 }

@@ -97,5 +97,11 @@ int		read_light(t_data *data, char *file, int select);
 char	*word_return(char *str, int select);
 int		read_camera(t_data *data, char *file, int select);
 int		read_object(t_data *d, char *f, int s);
+int		get_object_type(char *f, int s, t_obj *obj);
+int		get_object_pos(char *f, int s, t_obj *obj);
+int		get_object_rad(char *f, int s, t_obj *obj);
+int		get_object_height(char *f, int s, t_obj *obj);
+int		get_object_vec(char *f, int s, t_obj *obj);
+t_obj	*create_object(t_data *data);
 
 #endif

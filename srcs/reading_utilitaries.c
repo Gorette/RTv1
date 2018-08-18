@@ -28,3 +28,18 @@ float	ft_atof(const char *str)
 		levier = levier * 10;
 	return (result / levier);
 }
+
+t_obj	*create_object(t_data *data)
+{
+	t_obj	*new;
+
+	if (!(new = (t_obj *)malloc(sizeof(t_obj))))
+		ft_fail("Error: Could not allocate memory.", data);
+	new->pos_c = 0;
+	new->type_c = 0;
+	new->radius_c = 0;
+	new->height_c = 0;
+	new->vector_c = 0;
+	return (new);
+}
+

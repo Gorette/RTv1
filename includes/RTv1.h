@@ -103,5 +103,9 @@ int		get_object_rad(char *f, int s, t_obj *obj);
 int		get_object_height(char *f, int s, t_obj *obj);
 int		get_object_vec(char *f, int s, t_obj *obj);
 t_obj	*create_object(t_data *data);
+int		key_release(int key, void *d);
+int		ft_increase_file(char **file, char *line);
+char	*start_reading(char *str);
+int		close_program(t_data *d);
 
 #endif

@@ -2,6 +2,7 @@ NAME = rtv1
 
 SRCS =	main.c					\
 		objects.c				\
+		events.c				\
 		reading.c				\
 		reading_utilitaries.c	\
 		read_light.c			\

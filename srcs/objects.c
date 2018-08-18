@@ -101,6 +101,8 @@ int		read_object(t_data *d, char *f, int s)
 	result = read_object_var(f, s, new);
 	if (new->type == NULL || result != 1)
 	{
+		if (new->type != NULL)
+			free(new->type);
 		free(new);
 		return (0);
 	}

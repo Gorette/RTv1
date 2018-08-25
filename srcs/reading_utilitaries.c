@@ -38,7 +38,7 @@ t_obj	*create_object(t_data *data)
 	new->pos_c = 0;
 	new->type_c = 0;
 	new->radius_c = 0;
-	new->height_c = 0;
+	new->angle_c = 0;
 	new->vector_c = 0;
 	return (new);
 }

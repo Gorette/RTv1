@@ -63,6 +63,7 @@ void		let_mlx_loop(t_data *data)
 	mlx_hook(data->win_ptr, 17, 1L << 17, &close_program, data);
 //	mlx_hook(data->win_ptr, 2, 1L << 0, &key_pressed, data);
 	mlx_hook(data->win_ptr, 3, 1L << 1, &key_release, data);
+	mlx_loop_hook(data->mlx_ptr, &refresh_expose, data);
 	mlx_loop(data->mlx_ptr);
 }
 
@@ -78,6 +79,7 @@ int			main(int argc, char **argv)
 	file = start_reading(argv[1]);
 	read_file(data, file);
 	ft_putstr("ca fonctionne.\n");
+	start_raytracing(data);
 	let_mlx_loop(data);
 	return (0);
 }

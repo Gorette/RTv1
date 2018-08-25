@@ -54,6 +54,7 @@ int		get_light_pos(char *file, int select, t_light *light)
 	light->px = tab[0];
 	light->py = tab[1];
 	light->pz = tab[2];
+	light->intensity = 100;
 	free(tab);
 	return (select);
 }

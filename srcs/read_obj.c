@@ -53,7 +53,7 @@ int		get_object_rad(char *f, int s, t_obj *obj)
 	return (1);
 }
 
-int		get_object_height(char *f, int s, t_obj *obj)
+int		get_object_angle(char *f, int s, t_obj *obj)
 {
 	float	*tab;
 
@@ -63,8 +63,8 @@ int		get_object_height(char *f, int s, t_obj *obj)
 		free(tab);
 		return (0);
 	}
-	obj->height = tab[0];
-	obj->height_c += 1;
+	obj->angle = tab[0];
+	obj->angle_c += 1;
 	free(tab);
 	return (1);
 }

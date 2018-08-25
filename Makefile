@@ -8,6 +8,7 @@ SRCS =	main.c					\
 		read_light.c			\
 		read_cam.c				\
 		read_obj.c				\
+		raytracer.c				\
 
 SRCO = $(SRCS:.c=.o)
 

@@ -14,3 +14,10 @@ int		key_release(int key, void *d)
 		close_program(d);
 	return (1);
 }
+
+int		refresh_expose(t_data *d)
+{
+	//start_raytracing;
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img->ptr, 0, 0);
+	return (0);
+}

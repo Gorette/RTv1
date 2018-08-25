@@ -14,15 +14,13 @@ object {
 	type(cylinder)
 	pos(x,y,z)
 	radius(x)
-	height(z)
 	vector(x,y,z)
 }
 
 object {
 	type(cone)
 	pos(x,y,z)
-	radius(x)
-	height(z)
+	angle(x)
 	vector(x,y,z)
 }
 

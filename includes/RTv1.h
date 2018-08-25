@@ -22,6 +22,13 @@
 # define LA 896
 # define HA 504
 
+typedef struct		s_vec
+{
+	float			x;
+	float			y;
+	float			z;
+}					t_vec;
+
 typedef struct		s_cam
 {
 	float			px;
@@ -37,6 +44,7 @@ typedef struct		s_light
 	float			px;
 	float			py;
 	float			pz;
+	int				intensity;
 }					t_light;
 
 typedef struct		s_obj
@@ -46,7 +54,7 @@ typedef struct		s_obj
 	float			py;
 	float			pz;
 	float			radius;
-	float			height;
+	float			angle;
 	float			vx;
 	float			vy;
 	float			vz;
@@ -57,7 +65,7 @@ typedef struct		s_obj
 	int				pos_c;
 	int				type_c;
 	int				radius_c;
-	int				height_c;
+	int				angle_c;
 	int				vector_c;
 }					t_obj;
 
@@ -100,12 +108,14 @@ int		read_object(t_data *d, char *f, int s);
 int		get_object_type(char *f, int s, t_obj *obj);
 int		get_object_pos(char *f, int s, t_obj *obj);
 int		get_object_rad(char *f, int s, t_obj *obj);
-int		get_object_height(char *f, int s, t_obj *obj);
+int		get_object_angle(char *f, int s, t_obj *obj);
 int		get_object_vec(char *f, int s, t_obj *obj);
 t_obj	*create_object(t_data *data);
 int		key_release(int key, void *d);
 int		ft_increase_file(char **file, char *line);
 char	*start_reading(char *str);
 int		close_program(t_data *d);
+int		refresh_expose(t_data *d);
+void		start_raytracing(t_data *d);
 
 #endif

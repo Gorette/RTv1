@@ -1,5 +1,5 @@
 camera {
-	pos(58.3,7.3,2.3)
+	pos(1,2,2)
 	dir(3,2,1)
 }
 
@@ -15,7 +15,6 @@ object {
 	type(cylinder)
 	pos(4,2,1)
 	radius(1)
-	height(4332)
 	vector(4,4,2)
 }
 
@@ -23,7 +22,7 @@ object {
 	type(cone)
 	pos(1,2,3)
 	radius(1)
-	height(2)
+	angle(2)
 	vector(23,23,1)
 }
 

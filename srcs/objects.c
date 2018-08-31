@@ -45,12 +45,12 @@ int		expected_result(t_obj *obj)
 	}
 	if (!(ft_strcmp(obj->type, "cylinder")))
 	{
-		if (obj->pos_c == 1 && obj->radius_c == 1 && obj->vector_c == 1)
+		if (obj->pos_c == 1 && obj->radius_c == 1 && obj->rotation_c == 1)
 			return (1);
 	}
 	if (!(ft_strcmp(obj->type, "cone")))
 	{
-		if (obj->pos_c == 1 && obj->angle_c == 1 && obj->vector_c == 1)
+		if (obj->pos_c == 1 && obj->radius_c == 1 && obj->rotation_c == 1)
 			return (1);
 	}
 	if (!(ft_strcmp(obj->type, "plane")))
@@ -73,6 +73,8 @@ int		compare_string_to_values(char *f, int s, t_obj *new)
 		return (get_object_angle(f, s, new));
 	else if (ft_strncmp(f + s, "vector(", 7) == 0)
 		return (get_object_vec(f, s, new));
+	else if (ft_strncmp(f + s, "rotation(", 9) == 0)
+		return (get_object_rot(f, s, new));
 //	else if (ft_strncmp(f + s, "color(", 6) == 0)
 	return (0);
 }

@@ -40,6 +40,7 @@ t_obj	*create_object(t_data *data)
 	new->radius_c = 0;
 	new->angle_c = 0;
 	new->vector_c = 0;
+	new->rotation_c = 0;
 	return (new);
 }
 
@@ -92,4 +93,22 @@ char		*start_reading(char *str)
 	if (!file || ft_strlen(file) == 0)
 		ft_fail("Error: File is empty.", NULL);
 	return (file);
+}
+
+int		get_object_rot(char *f, int s, t_obj *obj)
+{
+	float	*tab;
+
+	tab = three_values_tab(f, s);
+	if (!(f[(int)tab[4]]) || tab[3] != 3)
+	{
+		free(tab);
+		return (0);
+	}
+	obj->rx = tab[0];
+	obj->ry = tab[1];
+	obj->rz = tab[2];
+	free(tab);
+	obj->rotation_c += 1;
+	return (1);
 }

@@ -14,20 +14,20 @@ object {
 	type(cylinder)
 	pos(x,y,z)
 	radius(x)
-	vector(x,y,z)
+	rotation(x,y,z)
 }
 
 object {
 	type(cone)
 	pos(x,y,z)
 	angle(x)
-	vector(x,y,z)
+	rotation(x,y,z)
 }
 
 object {
 	type(plane)
 	pos(x,y,z)
-	vector(x,y,z)
+	rotation(x,y,z)
 }
 
 light {

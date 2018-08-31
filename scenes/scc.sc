@@ -16,7 +16,7 @@ object {
 	pos(4,2,1)
 	radius(1)
 	height(4332)
-	vector(4,4,2)
+	rotation(4,4,2)
 }
 
 light {
@@ -28,7 +28,7 @@ object {
 	pos(1,2,3)
 	radius(1)
 	height(2)
-	vector(23,23,1)
+	rotation(23,23,1)
 }
 
 object {

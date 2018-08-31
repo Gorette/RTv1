@@ -61,12 +61,16 @@ typedef struct		s_obj
 	int				r;
 	int				g;
 	int				b;
+	int				rx;
+	int				ry;
+	int				rz;
 	struct s_obj	*next;
 	int				pos_c;
 	int				type_c;
 	int				radius_c;
 	int				angle_c;
 	int				vector_c;
+	int				rotation_c;
 }					t_obj;
 
 typedef struct		s_img
@@ -109,6 +113,7 @@ int		get_object_type(char *f, int s, t_obj *obj);
 int		get_object_pos(char *f, int s, t_obj *obj);
 int		get_object_rad(char *f, int s, t_obj *obj);
 int		get_object_angle(char *f, int s, t_obj *obj);
+int		get_object_rot(char *f, int s, t_obj *obj);
 int		get_object_vec(char *f, int s, t_obj *obj);
 t_obj	*create_object(t_data *data);
 int		key_release(int key, void *d);

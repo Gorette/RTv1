@@ -38,27 +38,6 @@ t_img		*init_img(t_data *data)
 	return (img);
 }
 
-t_data		*new_data(void)
-{
-	t_data	*new;
-
-	if (!(new = (t_data *)malloc(sizeof(t_data) * 1)))
-		ft_fail("Error: Could not allocate memory", NULL);
-	new->img = NULL;
-	new->obj = NULL;
-	new->cam = NULL;
-	new->light = NULL;
-	new->rays = NULL;
-	new->lights = 0;
-	new->objects = 0;
-	if (!(new->mlx_ptr = mlx_init()))
-		ft_fail("Error: Connection failed.", NULL);
-	if (!(new->win_ptr = mlx_new_window(new->mlx_ptr, LA, HA, "rtv1")))
-		ft_fail("Error: Unable to create window.", NULL);
-	new->img = init_img(new);
-	return (new);
-}
-
 void		let_mlx_loop(t_data *data)
 {
 	mlx_hook(data->win_ptr, 17, 1L << 17, &close_program, data);

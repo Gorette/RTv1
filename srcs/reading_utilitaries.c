@@ -29,21 +29,6 @@ float	ft_atof(const char *str)
 	return (result / levier);
 }
 
-t_obj	*create_object(t_data *data)
-{
-	t_obj	*new;
-
-	if (!(new = (t_obj *)malloc(sizeof(t_obj))))
-		ft_fail("Error: Could not allocate memory.", data);
-	new->pos_c = 0;
-	new->type_c = 0;
-	new->radius_c = 0;
-	new->angle_c = 0;
-	new->vector_c = 0;
-	new->rotation_c = 0;
-	return (new);
-}
-
 int		ft_increase_file(char **file, char *line)
 {
 	char	*copy;

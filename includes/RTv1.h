@@ -134,5 +134,10 @@ void	start_raytracing(t_data *d);
 t_vec	two_point_vector(t_dot p1, t_dot p2);
 void	norm_vec(t_vec *to_normalize);
 void	put_pixel_to_image(t_dot d, t_data *data, char *img);
+t_dot	new_dot(float x, float y, float z);
+t_data		*new_data(void);
+t_img		*init_img(t_data *data);
+int		solve_sphere(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s);
+int		solve_plane(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s);
 
 #endif

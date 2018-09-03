@@ -1,30 +1,5 @@
 #include "RTv1.h"
 
-int		solve_quadratic(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s)
-{
-	float	a;
-	float	b;
-	float	c;
-	float	delta;
-
-	*sol1 = -1;
-	*sol2 = -1;
-	a = pow(ray.x, 2) + pow(ray.y, 2) + pow(ray.z, 2);
-	b = 2 * (d->cam->px * ray.x + d->cam->py * ray.y + d->cam->pz * ray.z - s->px * ray.x - s->py * ray.y - s->pz * ray.z);
-	c = 2 * (s->px * d->cam->px + s->py * d->cam->py + s->pz * d->cam->pz) + pow(d->cam->px, 2) + pow(d->cam->py, 2) + pow(d->cam->pz, 2) + pow(s->px, 2) + pow(s->py, 2) + pow(s->pz, 2) - pow(s->radius, 2);
-	delta = pow(b, 2) - 4 * a * c;
-	if (delta < 0)
-		return (-1);
-	if (delta == 0)
-		*sol1 = -b / 2 * a;
-	else if (delta > 0)
-	{
-		*sol1 = -b + sqrt(delta) / 2 * a;
-		*sol2 = -b - sqrt(delta) / 2 * a;
-	}
-	return (1);
-}
-
 void	malloc_rays(t_data *d)
 {
 	int		i;
@@ -38,16 +13,6 @@ void	malloc_rays(t_data *d)
 			ft_fail("Error: could not allocate memory.", d);
 		i++;
 	}
-}
-
-t_dot	new_dot(float x, float y, float z)
-{
-	t_dot	d;
-
-	d.x = x;
-	d.y = y;
-	d.z = z;
-	return (d);
 }
 
 void	gen_rays(t_data *d)
@@ -74,26 +39,40 @@ void	gen_rays(t_data *d)
 	}
 }
 
+int			test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj)
+{
+	*s1 = -1;
+	*s2 = -1;
+	if (ft_strcmp(obj->type, "sphere") == 0)
+		return (solve_sphere(s1, s2, d, ray, obj));
+	if (ft_strcmp(obj->type, "plane") == 0)
+		return (solve_plane(s1, s2, d, ray, obj));
+	return (0);
+}
+
 void		start_raytracing(t_data *d)
 {
 	float	sol1;
 	float	sol2;
-	int		ret;
+	int		obj_i;
 	int		i;
 	int		j;
 
-	i = 0;
+	i = -1;
+	obj_i = 0;
 	gen_rays(d);
-	while (i < HA)
+	while (++i < HA)
 	{
-		j = 0;
-		while (j < LA)
+		j = -1;
+		while (++j < LA)
 		{
-			ret = solve_quadratic(&sol1, &sol2, d, d->rays[i][j], d->obj[0]);
-			if (ret == 1)
-				put_pixel_to_image(new_dot(j, i, 0), d, d->img->str);
-			j++;
+			obj_i = -1;
+			while (++obj_i <= d->objects - 1)
+			{
+				if (test_object(&sol1, &sol2, d, d->rays[i][j],
+					d->obj[obj_i]) > 0)
+					put_pixel_to_image(new_dot(j, i, 0), d, d->img->str);
+			}
 		}
-		i++;
 	}
 }

@@ -11,6 +11,8 @@ SRCS =	main.c					\
 		raytracer.c				\
 		vector.c				\
 		put_pixel.c				\
+		new.c					\
+		quadratic.c				\
 
 SRCO = $(SRCS:.c=.o)
 

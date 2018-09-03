@@ -5,7 +5,7 @@ camera {
 
 object {
 	type(sphere)
-	pos(0, 0, 10)
-	radius(80)
+	pos(0, 0, 300)
+	radius(10)
 	color(255, 255, 255)
 }

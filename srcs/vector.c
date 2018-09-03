@@ -18,3 +18,13 @@ void	norm_vec(t_vec *to_normalize)
 		to_normalize->z *= len;
 	}
 }
+
+t_vec	two_point_vector(t_dot p1, t_dot p2)
+{
+	t_vec	vec;
+
+	vec.x = p2.x - p1.x;
+	vec.y = p2.y - p1.y;
+	vec.z = p2.z - p1.z;
+	return (vec);
+}

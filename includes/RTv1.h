@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:05:33 by axbal             #+#    #+#             */
-/*   Updated: 2018/08/17 13:18:29 by axbal            ###   ########.fr       */
+/*   Updated: 2018/09/03 13:06:18 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define LA 896
 # define HA 504
+# define FOV 90
 
 typedef struct		s_vec
 {
@@ -28,6 +29,13 @@ typedef struct		s_vec
 	float			y;
 	float			z;
 }					t_vec;
+
+typedef struct		s_dot
+{
+	float			x;
+	float			y;
+	float			z;
+}					t_dot;
 
 typedef struct		s_cam
 {
@@ -92,6 +100,7 @@ typedef struct		s_data
 	t_obj			**obj;
 	t_light			**light;
 	t_cam			*cam;
+	t_vec			**rays;
 	int				lights;
 	int				objects;
 	float			s_xmin;
@@ -121,6 +130,9 @@ int		ft_increase_file(char **file, char *line);
 char	*start_reading(char *str);
 int		close_program(t_data *d);
 int		refresh_expose(t_data *d);
-void		start_raytracing(t_data *d);
+void	start_raytracing(t_data *d);
+t_vec	two_point_vector(t_dot p1, t_dot p2);
+void	norm_vec(t_vec *to_normalize);
+void	put_pixel_to_image(t_dot d, t_data *data, char *img);
 
 #endif

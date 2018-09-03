@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:10:49 by axbal             #+#    #+#             */
-/*   Updated: 2018/08/17 13:19:14 by axbal            ###   ########.fr       */
+/*   Updated: 2018/09/03 13:08:54 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_data		*new_data(void)
 	new->obj = NULL;
 	new->cam = NULL;
 	new->light = NULL;
+	new->rays = NULL;
 	new->lights = 0;
 	new->objects = 0;
 	if (!(new->mlx_ptr = mlx_init()))
@@ -64,6 +65,7 @@ void		let_mlx_loop(t_data *data)
 //	mlx_hook(data->win_ptr, 2, 1L << 0, &key_pressed, data);
 	mlx_hook(data->win_ptr, 3, 1L << 1, &key_release, data);
 	mlx_loop_hook(data->mlx_ptr, &refresh_expose, data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->ptr, 0, 0);
 	mlx_loop(data->mlx_ptr);
 }
 
@@ -78,8 +80,8 @@ int			main(int argc, char **argv)
 	data = new_data();
 	file = start_reading(argv[1]);
 	read_file(data, file);
-	ft_putstr("ca fonctionne.\n");
 	start_raytracing(data);
+	ft_putstr("ca fonctionne.\n");
 	let_mlx_loop(data);
 	return (0);
 }

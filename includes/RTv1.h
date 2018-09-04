@@ -23,6 +23,14 @@
 # define HA 504
 # define FOV 90
 
+typedef struct		s_color
+{
+	int				r;
+	int				g;
+	int				b;
+	int				a;
+}					t_color;
+
 typedef struct		s_vec
 {
 	float			x;
@@ -63,9 +71,7 @@ typedef struct		s_obj
 	float			pz;
 	float			radius;
 	float			angle;
-	float			vx;
-	float			vy;
-	float			vz;
+	t_vec			*v;
 	int				r;
 	int				g;
 	int				b;
@@ -138,6 +144,7 @@ t_dot	new_dot(float x, float y, float z);
 t_data		*new_data(void);
 t_img		*init_img(t_data *data);
 int		solve_sphere(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s);
-int		solve_plane(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s);
+float	scalar(t_vec *v1, t_vec *v2);
+int		solve_plane(float *sol1, t_data *d, t_vec ray, t_obj *p);
 
 #endif

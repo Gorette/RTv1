@@ -27,7 +27,7 @@ object {
 object {
 	type(plane)
 	pos(x,y,z)
-	rotation(x,y,z)
+	vector(x,y,z)
 }
 
 light {

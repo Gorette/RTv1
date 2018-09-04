@@ -28,3 +28,8 @@ t_vec	two_point_vector(t_dot p1, t_dot p2)
 	vec.z = p2.z - p1.z;
 	return (vec);
 }
+
+float	scalar(t_vec *v1, t_vec *v2)
+{
+	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+}

@@ -30,7 +30,7 @@ void	gen_rays(t_data *d)
 		j = 0;
 		while (j < LA)
 		{
-			p2 = new_dot(j - LA / 2, i - HA / 2, LA / (2 * (tan(FOV / 2))));
+			p2 = new_dot(j - LA / 2, -i + HA / 2, LA / (2 * (tan(FOV / 2))));
 			d->rays[i][j] = two_point_vector(p1, p2);
 			norm_vec(&(d->rays[i][j]));
 			j++;
@@ -41,12 +41,17 @@ void	gen_rays(t_data *d)
 
 int			test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj)
 {
+	int		ret;
+
 	*s1 = -1;
 	*s2 = -1;
+	ret = 0;
 	if (ft_strcmp(obj->type, "sphere") == 0)
-		return (solve_sphere(s1, s2, d, ray, obj));
+		ret = solve_sphere(s1, s2, d, ray, obj);
 	if (ft_strcmp(obj->type, "plane") == 0)
-		return (solve_plane(s1, s2, d, ray, obj));
+		ret = solve_plane(s1, d, ray, obj);
+	if (ret == 1 && (*s1 >= 0 || *s2 >= 0))
+		return (1);
 	return (0);
 }
 

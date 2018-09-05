@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:05:33 by axbal             #+#    #+#             */
-/*   Updated: 2018/09/03 13:06:18 by axbal            ###   ########.fr       */
+/*   Updated: 2018/09/05 12:38:01 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,12 @@ t_vec	two_point_vector(t_dot p1, t_dot p2);
 void	norm_vec(t_vec *to_normalize);
 void	put_pixel_to_image(t_dot d, t_data *data, char *img);
 t_dot	new_dot(float x, float y, float z);
-t_data		*new_data(void);
-t_img		*init_img(t_data *data);
+t_data	*new_data(void);
+t_img	*init_img(t_data *data);
 int		solve_sphere(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s);
 float	scalar(t_vec *v1, t_vec *v2);
 int		solve_plane(float *sol1, t_data *d, t_vec ray, t_obj *p);
+int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o);
+int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o);
 
 #endif

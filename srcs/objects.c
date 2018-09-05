@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:56:25 by axbal             #+#    #+#             */
-/*   Updated: 2018/08/17 13:40:40 by axbal            ###   ########.fr       */
+/*   Updated: 2018/09/05 12:17:24 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		expected_result(t_obj *obj)
 	}
 	if (!(ft_strcmp(obj->type, "cone")))
 	{
-		if (obj->pos_c == 1 && obj->radius_c == 1 && obj->rotation_c == 1)
+		if (obj->pos_c == 1 && obj->angle_c == 1 && obj->rotation_c == 1)
 			return (1);
 	}
 	if (!(ft_strcmp(obj->type, "plane")))

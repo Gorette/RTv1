@@ -1,5 +1,53 @@
 #include "RTv1.h"
 
+int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
+{
+	float	a;
+	float	b;
+	float	c;
+	float	delta;
+
+	a = pow(ray.x, 2) + pow(ray.y, 2);
+	b = 2 * d->cam->px * ray.x + 2 * d->cam->py * ray.y;
+	c = pow(d->cam->px, 2) + pow(d->cam->py, 2) - pow(o->radius, 2);
+	delta = pow(b, 2) - 4 * a * c;
+	if (delta < 0)
+		return (-1);
+	else if (delta == 0)
+		*sol1 = -b / 2 * a;
+	else if (delta > 0)
+	{
+		*sol1 = -b + sqrt(delta) / 2 * a;
+		*sol2 = -b - sqrt(delta) / 2 * a;
+	}
+	return (1);
+}
+
+int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
+{
+	float	a;
+	float	b;
+	float	c;
+	float	delta;
+
+	a = pow(ray.x, 2) + pow(ray.y, 2) - pow(tan(o->angle), 2) * pow(ray.z, 2);
+	b = 2 * d->cam->px * ray.x + 2 * d->cam->py * ray.y -
+	pow(tan(o->angle), 2) * 2 * d->cam->pz * ray.z;
+	c = pow(d->cam->px, 2) + pow(d->cam->py, 2) - pow(tan(o->angle), 2) *
+	pow(d->cam->pz, 2);
+	delta = pow(b, 2) - 4 * a * c;
+	if (delta < 0)
+		return (-1);
+	else if (delta == 0)
+		*sol1 = -b / 2 * a;
+	else if (delta > 0)
+	{
+		*sol1 = -b + sqrt(delta) / 2 * a;
+		*sol2 = -b - sqrt(delta) / 2 * a;
+	}
+	return (1);
+}
+
 int		solve_plane(float *sol1, t_data *d, t_vec ray, t_obj *p)
 {
 	float	q;

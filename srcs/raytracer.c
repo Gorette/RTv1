@@ -50,6 +50,10 @@ int			test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj)
 		ret = solve_sphere(s1, s2, d, ray, obj);
 	if (ft_strcmp(obj->type, "plane") == 0)
 		ret = solve_plane(s1, d, ray, obj);
+	if (ft_strcmp(obj->type, "cylinder") == 0)
+		ret = solve_cyli(s1, s2, d, ray, obj);
+	if (ft_strcmp(obj->type, "cone") == 0)
+		ret = solve_cone(s1, s2, d, ray, obj);
 	if (ret == 1 && (*s1 >= 0 || *s2 >= 0))
 		return (1);
 	return (0);

@@ -13,6 +13,7 @@ SRCS =	main.c					\
 		put_pixel.c				\
 		new.c					\
 		quadratic.c				\
+		matrix.c				\
 
 SRCO = $(SRCS:.c=.o)
 

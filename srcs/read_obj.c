@@ -63,7 +63,7 @@ int		get_object_angle(char *f, int s, t_obj *obj)
 		free(tab);
 		return (0);
 	}
-	obj->angle = tab[0];
+	obj->angle = degree_to_radian(tab[0]);
 	obj->angle_c += 1;
 	free(tab);
 	return (1);

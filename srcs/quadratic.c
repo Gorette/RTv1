@@ -1,49 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quadratic.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/06 14:44:53 by axbal             #+#    #+#             */
+/*   Updated: 2018/09/06 16:04:15 by axbal            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "RTv1.h"
+#include <stdio.h>
 
 int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 {
-	float	a;
-	float	b;
-	float	c;
+	t_dot	q;
+	t_dot	p;
 	float	delta;
 
-	a = pow(ray.x, 2) + pow(ray.y, 2);
-	b = 2 * d->cam->px * ray.x + 2 * d->cam->py * ray.y;
-	c = pow(d->cam->px, 2) + pow(d->cam->py, 2) - pow(o->radius, 2);
-	delta = pow(b, 2) - 4 * a * c;
+	p = new_dot(d->cam->px, d->cam->py, d->cam->pz);
+	p = trans_vec(p, o->px, o->py, o->pz);
+	ray = rot_vec(ray, o->rx, o->ry, o->rz);
+	q.x = pow(ray.x, 2) + pow(ray.y, 2);
+	q.y = 2 * p.x * ray.x + 2 * p.y * ray.y;
+	q.z = pow(p.x, 2) + pow(p.y, 2) - pow(o->radius, 2);
+	delta = pow(q.y, 2) - 4 * q.x * q.z;
 	if (delta < 0)
 		return (-1);
 	else if (delta == 0)
-		*sol1 = -b / 2 * a;
+		*sol1 = -q.y / 2 * q.x;
 	else if (delta > 0)
 	{
-		*sol1 = -b + sqrt(delta) / 2 * a;
-		*sol2 = -b - sqrt(delta) / 2 * a;
+		*sol1 = -q.y + sqrt(delta) / 2 * q.x;
+		*sol2 = -q.y - sqrt(delta) / 2 * q.x;
 	}
 	return (1);
 }
 
 int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 {
-	float	a;
-	float	b;
-	float	c;
+	t_dot	q;
+	t_dot	p;
 	float	delta;
 
-	a = pow(ray.x, 2) + pow(ray.y, 2) - pow(tan(o->angle), 2) * pow(ray.z, 2);
-	b = 2 * d->cam->px * ray.x + 2 * d->cam->py * ray.y -
-	pow(tan(o->angle), 2) * 2 * d->cam->pz * ray.z;
-	c = pow(d->cam->px, 2) + pow(d->cam->py, 2) - pow(tan(o->angle), 2) *
-	pow(d->cam->pz, 2);
-	delta = pow(b, 2) - 4 * a * c;
+	p = new_dot(d->cam->px, d->cam->py, d->cam->pz);
+	p = trans_vec(p, o->px, o->py, o->pz);
+	ray = rot_vec(ray, o->rx, o->ry, o->rz);
+	q.x = pow(ray.x, 2) + pow(ray.y, 2) - pow(tan(o->angle), 2) * pow(ray.z, 2);
+	q.y = 2 * p.x * ray.x + 2 * p.y * ray.y -
+	pow(tan(o->angle), 2) * 2 * p.z * ray.z;
+	q.z = pow(p.x, 2) + pow(p.y, 2) - pow(tan(o->angle), 2) *
+	pow(p.z, 2);
+	delta = pow(q.y, 2) - 4 * q.x * q.z;
 	if (delta < 0)
 		return (-1);
 	else if (delta == 0)
-		*sol1 = -b / 2 * a;
+		*sol1 = -q.y / 2 * q.x;
 	else if (delta > 0)
 	{
-		*sol1 = -b + sqrt(delta) / 2 * a;
-		*sol2 = -b - sqrt(delta) / 2 * a;
+		*sol1 = -q.y + sqrt(delta) / 2 * q.x;
+		*sol2 = -q.y - sqrt(delta) / 2 * q.x;
 	}
 	return (1);
 }

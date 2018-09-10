@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 14:44:53 by axbal             #+#    #+#             */
-/*   Updated: 2018/09/06 16:04:15 by axbal            ###   ########.fr       */
+/*   Updated: 2018/09/10 11:56:07 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 {
 	t_dot	q;
-	t_dot	p;
+	t_vec	p;
 	float	delta;
 
-	p = new_dot(d->cam->px, d->cam->py, d->cam->pz);
+	p = new_vec((float)d->cam->px, (float)d->cam->py, (float)d->cam->pz);
 	p = trans_vec(p, o->px, o->py, o->pz);
+	p = rot_vec(p, o->rx, o->ry, o->rz);
 	ray = rot_vec(ray, o->rx, o->ry, o->rz);
 	q.x = pow(ray.x, 2) + pow(ray.y, 2);
 	q.y = 2 * p.x * ray.x + 2 * p.y * ray.y;
@@ -41,11 +42,12 @@ int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 {
 	t_dot	q;
-	t_dot	p;
+	t_vec	p;
 	float	delta;
 
-	p = new_dot(d->cam->px, d->cam->py, d->cam->pz);
+	p = new_vec(d->cam->px, d->cam->py, d->cam->pz);
 	p = trans_vec(p, o->px, o->py, o->pz);
+	p = rot_vec(p, o->rx, o->ry, o->rz);
 	ray = rot_vec(ray, o->rx, o->ry, o->rz);
 	q.x = pow(ray.x, 2) + pow(ray.y, 2) - pow(tan(o->angle), 2) * pow(ray.z, 2);
 	q.y = 2 * p.x * ray.x + 2 * p.y * ray.y -

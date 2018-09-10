@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 13:33:37 by axbal             #+#    #+#             */
-/*   Updated: 2018/09/06 16:08:48 by axbal            ###   ########.fr       */
+/*   Updated: 2018/09/10 12:01:20 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,19 @@ t_vec	rot_z(t_vec ray, float teta)
 
 t_vec	rot_vec(t_vec ray, float rx, float ry, float rz)
 {
-	ray = rot_x(ray, degree_to_radian(rx));
-	ray = rot_y(ray, degree_to_radian(ry));
-	ray = rot_z(ray, degree_to_radian(rz));
+	if (rx != 0.0)
+		ray = rot_x(ray, degree_to_radian(rx));
+	if (ry != 0.0)
+		ray = rot_y(ray, degree_to_radian(ry));
+	if (rz != 0.0)
+		ray = rot_z(ray, degree_to_radian(rz));
 	return (ray);
 }
 
-t_dot	trans_vec(t_dot dot, float tx, float ty, float tz)
+t_vec	trans_vec(t_vec vec, float tx, float ty, float tz)
 {
-	dot.x -= tx;
-	dot.y -= ty;
-	dot.z -= tz;
-	return (dot);
+	vec.x -= tx;
+	vec.y -= ty;
+	vec.z -= tz;
+	return (vec);
 }

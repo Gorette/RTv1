@@ -10,6 +10,16 @@ t_dot	new_dot(float x, float y, float z)
 	return (d);
 }
 
+t_vec	new_vec(float x, float y, float z)
+{
+	t_vec	v;
+
+	v.x = x;
+	v.y = y;
+	v.z = z;
+	return (v);
+}
+
 t_data		*new_data(void)
 {
 	t_data	*new;

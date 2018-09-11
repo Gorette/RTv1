@@ -61,11 +61,14 @@ int			test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj)
 
 void		start_raytracing(t_data *d)
 {
-	float	sol1;
-	float	sol2;
+	float	s1;
+	float	s2;
 	int		obj_i;
 	int		i;
 	int		j;
+	float	dm;
+	t_obj	*o;
+	float	stamp;
 
 	i = -1;
 	obj_i = 0;
@@ -75,12 +78,36 @@ void		start_raytracing(t_data *d)
 		j = -1;
 		while (++j < LA)
 		{
+			dm = -1;
+			o = NULL;
 			obj_i = -1;
 			while (++obj_i <= d->objects - 1)
 			{
-				if (test_object(&sol1, &sol2, d, d->rays[i][j],
+				if (test_object(&s1, &s2, d, d->rays[i][j],
 					d->obj[obj_i]) > 0)
-					put_pixel_to_image(new_dot(j, i, 0), d, d->img->str);
+				{
+					stamp = dm;
+					if (dm == -1 || (s1 < dm && s1 >= 0) || (s2 < dm && s2 >= 0))
+					{
+						if (dm == -1)
+						{
+							if (s1 >= 0)
+								dm = s1;
+							if (s2 >= 0)
+								dm = s1 < s2 ? dm : s2;
+						}
+						else
+						{
+							if (s1 >= 0 && s1 < dm)
+								dm = s1;
+							if (s2 >= 0 && s2 < s1 && s2 < dm)
+								dm = s2;
+						}
+						if (stamp != dm)
+							o = d->obj[obj_i];
+					}
+					put_pixel_to_image(new_dot(j, i, 0), d, d->img->str, dm);
+				}
 			}
 		}
 	}

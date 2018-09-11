@@ -50,12 +50,9 @@ t_vec	rot_z(t_vec ray, float teta)
 
 t_vec	rot_vec(t_vec ray, float rx, float ry, float rz)
 {
-	if (rx != 0.0)
-		ray = rot_x(ray, degree_to_radian(rx));
-	if (ry != 0.0)
-		ray = rot_y(ray, degree_to_radian(ry));
-	if (rz != 0.0)
-		ray = rot_z(ray, degree_to_radian(rz));
+	ray = rot_x(ray, degree_to_radian(rx));
+	ray = rot_y(ray, degree_to_radian(ry));
+	ray = rot_z(ray, degree_to_radian(rz));
 	return (ray);
 }
 

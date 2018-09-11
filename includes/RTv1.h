@@ -139,7 +139,7 @@ int		refresh_expose(t_data *d);
 void	start_raytracing(t_data *d);
 t_vec	two_point_vector(t_dot p1, t_dot p2);
 void	norm_vec(t_vec *to_normalize);
-void	put_pixel_to_image(t_dot d, t_data *data, char *img);
+void	put_pixel_to_image(t_dot d, t_data *data, char *img, float di);
 t_dot	new_dot(float x, float y, float z);
 t_vec	new_vec(float x, float y, float z);
 t_data	*new_data(void);

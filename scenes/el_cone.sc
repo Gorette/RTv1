@@ -5,7 +5,7 @@ camera {
 
 object {
 	type(cone)
-	pos(0, 0, 350)
-	rotation(0, 90, 0)
-	angle(1)
+	pos(-10, 0, 350)
+	rotation(0, 160, 0)
+	angle(12)
 }

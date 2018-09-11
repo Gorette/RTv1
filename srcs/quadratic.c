@@ -21,9 +21,8 @@ int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 
 	p = new_vec((float)d->cam->px, (float)d->cam->py, (float)d->cam->pz);
 	p = trans_vec(p, o->px, o->py, o->pz);
-	p = rot_vec(p, o->rx, o->ry, o->rz);
-	ray = rot_vec(ray, o->rx, o->ry, o->rz);
-	norm_vec(&ray);
+	p = rot_vec(p, o->rx, o->ry);
+	ray = rot_vec(ray, o->rx, o->ry);
 	q.x = pow(ray.x, 2) + pow(ray.y, 2);
 	q.y = 2 * p.x * ray.x + 2 * p.y * ray.y;
 	q.z = pow(p.x, 2) + pow(p.y, 2) - pow(o->radius, 2);
@@ -48,9 +47,8 @@ int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 
 	p = new_vec((float)d->cam->px, (float)d->cam->py, (float)d->cam->pz);
 	p = trans_vec(p, o->px, o->py, o->pz);
-	p = rot_vec(p, o->rx, o->ry, o->rz);
-	ray = rot_vec(ray, o->rx, o->ry, o->rz);
-	norm_vec(&ray);
+	p = rot_vec(p, o->rx, o->ry);
+	ray = rot_vec(ray, o->rx, o->ry);
 	q.x = pow(ray.x, 2) + pow(ray.y, 2) - (pow(ray.z, 2) * pow(tan(o->angle), 2));
 	q.y = 2 * (p.x * ray.x) + 2 * (p.y * ray.y) - 2 * ((p.z * ray.z) * pow(tan(o->angle), 2));
 	q.z = pow(p.x, 2) + pow(p.y, 2) - (pow(p.z, 2) * pow(tan(o->angle), 2));

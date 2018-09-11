@@ -14,14 +14,14 @@ object {
 	type(cylinder)
 	pos(x,y,z)
 	radius(x)
-	rotation(x,y,z)
+	rotation(x,y)
 }
 
 object {
 	type(cone)
 	pos(x,y,z)
 	angle(x)
-	rotation(x,y,z)
+	rotation(x,y)
 }
 
 object {

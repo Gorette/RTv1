@@ -6,7 +6,7 @@ camera {
 object {
 	type(cylinder)
 	pos(-20, 0, 50)
-	rotation(45, -30, 0)
+	rotation(45, -30)
 	radius(5)
 }
 

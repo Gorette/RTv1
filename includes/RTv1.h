@@ -77,7 +77,6 @@ typedef struct		s_obj
 	int				b;
 	int				rx;
 	int				ry;
-	int				rz;
 	struct s_obj	*next;
 	int				pos_c;
 	int				type_c;
@@ -150,7 +149,7 @@ int		solve_plane(float *sol1, t_data *d, t_vec ray, t_obj *p);
 int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o);
 int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o);
 t_vec	trans_vec(t_vec vec, float tx, float ty, float tz);
-t_vec	rot_vec(t_vec ray, float rx, float ry, float rz);
+t_vec	rot_vec(t_vec ray, float rx, float ry);
 float	degree_to_radian(float degree);
 
 #endif

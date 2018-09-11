@@ -36,23 +36,10 @@ t_vec	rot_y(t_vec ray, float teta)
 	return (ray);
 }
 
-t_vec	rot_z(t_vec ray, float teta)
-{
-	float	x;
-	float	y;
-
-	x = cos(teta) * ray.x - sin(teta) * ray.y;
-	y = sin(teta) * ray.x + cos(teta) * ray.y;
-	ray.x = x;
-	ray.y = y;
-	return (ray);
-}
-
-t_vec	rot_vec(t_vec ray, float rx, float ry, float rz)
+t_vec	rot_vec(t_vec ray, float rx, float ry)
 {
 	ray = rot_x(ray, degree_to_radian(rx));
 	ray = rot_y(ray, degree_to_radian(ry));
-	ray = rot_z(ray, degree_to_radian(rz));
 	return (ray);
 }
 

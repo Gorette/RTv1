@@ -30,11 +30,11 @@ int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 	if (delta < 0)
 		return (-1);
 	else if (delta == 0)
-		*sol1 = -q.y / 2 * q.x;
+		*sol1 = -q.y / (2 * q.x);
 	else if (delta > 0)
 	{
-		*sol1 = -q.y + sqrt(delta) / 2 * q.x;
-		*sol2 = -q.y - sqrt(delta) / 2 * q.x;
+		*sol1 = (-q.y - sqrt(delta)) / (2 * q.x);
+		*sol2 = (-q.y + sqrt(delta)) / (2 * q.x);
 	}
 	return (1);
 }
@@ -49,18 +49,18 @@ int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 	p = trans_vec(p, o->px, o->py, o->pz);
 	p = rot_vec(p, o->rx, o->ry);
 	ray = rot_vec(ray, o->rx, o->ry);
-	q.x = pow(ray.x, 2) + pow(ray.y, 2) - pow(ray.z, 2) * pow(tan(o->angle), 2);
-	q.y = 2 * (p.x * ray.x) + 2 * (p.y * ray.y) - 2 * ((p.z * ray.z) * pow(tan(o->angle), 2));
-	q.z = pow(p.x, 2) + pow(p.y, 2) - (pow(p.z, 2) * pow(tan(o->angle), 2));
+	q.x = pow(ray.x, 2) + pow(ray.y, 2) - pow(ray.z, 2) * tan(o->angle);
+	q.y = 2 * (p.x * ray.x) + 2 * (p.y * ray.y) - 2 * ((p.z * ray.z) * tan(o->angle));
+	q.z = pow(p.x, 2) + pow(p.y, 2) - (pow(p.z, 2) * tan(o->angle));
 	delta = pow(q.y, 2) - 4 * q.x * q.z;
 	if (delta < 0)
 		return (-1);
 	else if (delta == 0)
-		*sol1 = -q.y / 2 * q.x;
+		*sol1 = -q.y / (2 * q.x);
 	else if (delta > 0)
 	{
-		*sol1 = -q.y + sqrt(delta) / 2 * q.x;
-		*sol2 = -q.y - sqrt(delta) / 2 * q.x;
+		*sol1 = (-q.y - sqrt(delta)) / (2 * q.x);
+		*sol2 = (-q.y + sqrt(delta)) / (2 * q.x);
 	}
 	return (1);
 }
@@ -99,11 +99,11 @@ int		solve_sphere(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s)
 	if (delta < 0)
 		return (-1);
 	if (delta == 0)
-		*sol1 = -b / 2 * a;
+		*sol1 = -b / (2 * a);
 	else if (delta > 0)
 	{
-		*sol1 = -b + sqrt(delta) / 2 * a;
-		*sol2 = -b - sqrt(delta) / 2 * a;
+		*sol1 = (-b - sqrt(delta)) / (2 * a);
+		*sol2 = (-b + sqrt(delta)) / (2 * a);
 	}
 	return (1);
 }

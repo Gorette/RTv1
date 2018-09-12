@@ -49,7 +49,7 @@ int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 	p = trans_vec(p, o->px, o->py, o->pz);
 	p = rot_vec(p, o->rx, o->ry);
 	ray = rot_vec(ray, o->rx, o->ry);
-	q.x = pow(ray.x, 2) + pow(ray.y, 2) - (pow(ray.z, 2) * pow(tan(o->angle), 2));
+	q.x = pow(ray.x, 2) + pow(ray.y, 2) - pow(ray.z, 2) * pow(tan(o->angle), 2);
 	q.y = 2 * (p.x * ray.x) + 2 * (p.y * ray.y) - 2 * ((p.z * ray.z) * pow(tan(o->angle), 2));
 	q.z = pow(p.x, 2) + pow(p.y, 2) - (pow(p.z, 2) * pow(tan(o->angle), 2));
 	delta = pow(q.y, 2) - 4 * q.x * q.z;

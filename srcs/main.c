@@ -59,7 +59,10 @@ int			main(int argc, char **argv)
 	data = new_data();
 	file = start_reading(argv[1]);
 	read_file(data, file);
-	start_raytracing(data);
+	if (data->objects != 0)
+		start_raytracing(data);
+	else
+		ft_putstr_fd("No object to draw!\n", 2);
 	ft_putstr("ca fonctionne.\n");
 	let_mlx_loop(data);
 	return (0);

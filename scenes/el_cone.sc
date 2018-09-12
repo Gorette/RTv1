@@ -6,6 +6,6 @@ camera {
 object {
 	type(cone)
 	pos(-10, 0, 350)
-	rotation(0, 160)
-	angle(12)
+	rotation(20, 160)
+	angle(1)
 }

@@ -15,7 +15,7 @@ object {
 	type(cylinder)
 	pos(4,2,1)
 	radius(1)
-	rotation(4,4,2)
+	rotation(4,4)
 }
 
 light {
@@ -26,7 +26,7 @@ object {
 	type(cone)
 	pos(1,2,3)
 	angle(1)
-	rotation(23,23,1)
+	rotation(23,23)
 }
 
 object {

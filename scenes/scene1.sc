@@ -15,7 +15,7 @@ object {
 	type(cylinder)
 	pos(4,2,1)
 	radius(1)
-	vector(4,4,2)
+	rotation(60, 60)
 }
 
 object {
@@ -23,7 +23,7 @@ object {
 	pos(1,2,3)
 	radius(1)
 	angle(2)
-	vector(23,23,1)
+	rotation(23,23)
 }
 
 object {

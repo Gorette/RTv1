@@ -12,6 +12,6 @@ object {
 
 object {
 	type(sphere)
-	pos(0, 10, 30)
-	radius(15)
+	pos(0, 10, 50)
+	radius(20)
 }

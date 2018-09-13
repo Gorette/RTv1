@@ -106,7 +106,8 @@ void		start_raytracing(t_data *d)
 						if (stamp != dm)
 							o = d->obj[obj_i];
 					}
-					put_pixel_to_image(new_dot(j, i, 0), d, d->img->str, dm);
+					if (dm > -1)
+						put_pixel_to_image(new_dot(j, i, 0), d, d->img->str, o);
 				}
 			}
 		}

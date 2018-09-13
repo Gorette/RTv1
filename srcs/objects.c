@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:56:25 by axbal             #+#    #+#             */
-/*   Updated: 2018/09/05 12:17:24 by axbal            ###   ########.fr       */
+/*   Updated: 2018/09/13 13:21:44 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int		compare_string_to_values(char *f, int s, t_obj *new)
 		return (get_object_vec(f, s, new));
 	else if (ft_strncmp(f + s, "rotation(", 9) == 0)
 		return (get_object_rot(f, s, new));
-//	else if (ft_strncmp(f + s, "color(", 6) == 0)
+	else if (ft_strncmp(f + s, "color(", 6) == 0)
+		return (get_object_color(f, s, new));
 	return (0);
 }
 

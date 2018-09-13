@@ -20,6 +20,17 @@ t_vec	new_vec(float x, float y, float z)
 	return (v);
 }
 
+t_color		new_color(int r, int g, int b, int a)
+{
+	t_color		new;
+
+	new.r = r;
+	new.g = g;
+	new.b = b;
+	new.a = a;
+	return (new);
+}
+
 t_data		*new_data(void)
 {
 	t_data	*new;
@@ -53,5 +64,6 @@ t_obj	*create_object(t_data *data)
 	new->angle_c = 0;
 	new->vector_c = 0;
 	new->rotation_c = 0;
+	new->color = new_color(255, 255, 255, 0);
 	return (new);
 }

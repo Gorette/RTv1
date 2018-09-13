@@ -80,8 +80,7 @@ int		read_file(t_data *data, char *file)
 		{
 			select += ft_strlen(object);
 			if ((read_new_object(data, object, file, select)) > 0)
-			{
-			}
+				;
 			free(object);
 		}
 		select++;

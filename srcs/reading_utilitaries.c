@@ -96,3 +96,20 @@ int		get_object_rot(char *f, int s, t_obj *obj)
 	obj->rotation_c += 1;
 	return (1);
 }
+
+int		get_object_color(char *f, int s, t_obj *obj)
+{
+	float	*tab;
+
+	tab = three_values_tab(f, s);
+	if (!(f[(int)tab[4]]) || tab[3] != 3)
+	{
+		free(tab);
+		return (0);
+	}
+	if (tab[0] >= 0  && tab[0] <= 255 && tab[1] >= 0  && tab[1] <= 255
+	&& tab[2] >= 0 && tab[2] <= 255)
+	obj->color = new_color((int)tab[0], (int)tab[1], (int)tab[2], 0);
+	free(tab);
+	return (1);
+}

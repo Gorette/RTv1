@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:05:33 by axbal             #+#    #+#             */
-/*   Updated: 2018/09/07 15:23:26 by axbal            ###   ########.fr       */
+/*   Updated: 2018/09/13 13:33:51 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,9 @@ typedef struct		s_obj
 	float			radius;
 	float			angle;
 	t_vec			*v;
-	int				r;
-	int				g;
-	int				b;
 	int				rx;
 	int				ry;
+	t_color			color;
 	struct s_obj	*next;
 	int				pos_c;
 	int				type_c;
@@ -129,6 +127,7 @@ int		get_object_rad(char *f, int s, t_obj *obj);
 int		get_object_angle(char *f, int s, t_obj *obj);
 int		get_object_rot(char *f, int s, t_obj *obj);
 int		get_object_vec(char *f, int s, t_obj *obj);
+int		get_object_color(char *f, int s, t_obj *obj);
 t_obj	*create_object(t_data *data);
 int		key_release(int key, void *d);
 int		ft_increase_file(char **file, char *line);
@@ -138,10 +137,11 @@ int		refresh_expose(t_data *d);
 void	start_raytracing(t_data *d);
 t_vec	two_point_vector(t_dot p1, t_dot p2);
 void	norm_vec(t_vec *to_normalize);
-void	put_pixel_to_image(t_dot d, t_data *data, char *img, float di);
+void	put_pixel_to_image(t_dot d, t_data *data, char *img, t_obj *obj);
 t_dot	new_dot(float x, float y, float z);
 t_vec	new_vec(float x, float y, float z);
 t_data	*new_data(void);
+t_color	new_color(int r, int g, int b, int a);
 t_img	*init_img(t_data *data);
 int		solve_sphere(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s);
 float	scalar(t_vec *v1, t_vec *v2);

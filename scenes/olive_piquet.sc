@@ -5,13 +5,15 @@ camera {
 
 object {
 	type(cylinder)
-	pos(-20, 0, 50)
+	pos(0, 10, 50)
 	rotation(45, -30)
 	radius(5)
+	color(230, 225, 212)
 }
 
 object {
 	type(sphere)
 	pos(0, 10, 50)
 	radius(20)
+	color(112, 141, 35)
 }

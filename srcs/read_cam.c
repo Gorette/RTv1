@@ -29,9 +29,9 @@ int		search_dir_cam(t_cam *cam, char *f, int s)
 		free(tab);
 		return (-1);
 	}
-	cam->vx = tab[0];
-	cam->vy = tab[1];
-	cam->vz = tab[2];
+	cam->rx = tab[0];
+	cam->ry = tab[1];
+	cam->rz = tab[2];
 	free(tab);
 	return (1);
 }
@@ -54,7 +54,7 @@ int		read_camera2(char *file, int select, t_cam *new)
 			select += ft_strlen(word);
 			if (!(ft_strcmp(word, "pos")))
 				pos = search_pos_cam(new, file, select);
-			else
+			else if (!(ft_strcmp(word, "rotation")))
 				dir = search_dir_cam(new, file, select);
 			free(word);
 		}

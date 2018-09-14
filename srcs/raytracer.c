@@ -15,6 +15,24 @@ void	malloc_rays(t_data *d)
 	}
 }
 
+void	rot_rays(t_data *d)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < HA)
+	{
+		j = 0;
+		while (j < LA)
+		{
+			d->rays[i][j] = rot_vec(d->rays[i][j], d->cam->rx, d->cam->ry, d->cam->rz);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	gen_rays(t_data *d)
 {
 	int		i;
@@ -37,6 +55,7 @@ void	gen_rays(t_data *d)
 		}
 		i++;
 	}
+	rot_rays(d);
 }
 
 int			test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj)

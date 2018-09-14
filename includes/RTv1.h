@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:05:33 by axbal             #+#    #+#             */
-/*   Updated: 2018/09/13 13:33:51 by axbal            ###   ########.fr       */
+/*   Updated: 2018/09/14 13:09:00 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ typedef struct		s_cam
 	float			px;
 	float			py;
 	float			pz;
-	float			vx;
-	float			vy;
-	float			vz;
+	float			rx;
+	float			ry;
+	float			rz;
 }					t_cam;
 
 typedef struct		s_light
@@ -149,7 +149,7 @@ int		solve_plane(float *sol1, t_data *d, t_vec ray, t_obj *p);
 int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o);
 int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o);
 t_vec	trans_vec(t_vec vec, float tx, float ty, float tz);
-t_vec	rot_vec(t_vec ray, float rx, float ry);
+t_vec	rot_vec(t_vec ray, float rx, float ry, float rz);
 float	degree_to_radian(float degree);
 
 #endif

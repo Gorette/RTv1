@@ -1,6 +1,6 @@
 camera {
 	pos(0, 0, -100)
-	dir(0, 0, 1)
+	rotation(0, 0, 1)
 }
 
 object {

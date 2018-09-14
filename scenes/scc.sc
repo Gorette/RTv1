@@ -1,14 +1,13 @@
 camera {
-	pos(58.3,7.3,-2000)
-	dir(3,2,1)
+	pos(58.3,7.3,-20)
+	rotation(0,0,0)
 }
 
 object {
 	type(sphere)
-	pos(1,-3, 4, 34)
-	pos(1,-3,4)
+	pos(1,-3,40)
 	radius(1)
-	color(r,g,b)
+	color(173,188,165)
 }
 
 object {
@@ -16,6 +15,7 @@ object {
 	pos(4,2,1)
 	radius(1)
 	rotation(4,4)
+	color(232, 185, 171)
 }
 
 light {
@@ -27,12 +27,14 @@ object {
 	pos(1,2,3)
 	angle(1)
 	rotation(23,23)
+	color(224, 152, 145)
 }
 
 object {
 	type(plane)
-	pos(3,4,121)
+	pos(3,4,221)
 	vector(3,2,2)
+	color(140, 95, 102)
 }
 
 light {

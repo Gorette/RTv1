@@ -72,7 +72,10 @@ int		read_camera(t_data *data, char *file, int select)
 		ft_fail("Error: Could not allocate memory.", data);
 	result = read_camera2(file, select, new);
 	if (result == 2 && data->cam != NULL)
+	{
+		free(new);
 		ft_fail("Error: Several valid cameras detected.", data);
+	}
 	if (result == 2)
 		data->cam = new;
 	else

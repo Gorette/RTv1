@@ -23,7 +23,7 @@ void	gen_rays(t_data *d)
 	t_dot	p2;
 
 	i = 0;
-	p1 = new_dot(d->cam->px, d->cam->py, d->cam->pz);
+	p1 = new_dot(0, 0, 0);
 	malloc_rays(d);
 	while (i < HA)
 	{

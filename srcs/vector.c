@@ -26,7 +26,18 @@ t_vec	two_point_vector(t_dot p1, t_dot p2)
 	vec.x = p2.x - p1.x;
 	vec.y = p2.y - p1.y;
 	vec.z = p2.z - p1.z;
+	norm_vec(&vec);
 	return (vec);
+}
+
+t_dot	get_hitpoint(t_vec vector, float d, t_data *data)
+{
+	t_dot	dot;
+
+	dot.x = data->cam->px + vector.x * d;
+	dot.y = data->cam->py + vector.y * d;
+	dot.z = data->cam->pz + vector.z * d;
+	return (dot);
 }
 
 float	scalar(t_vec *v1, t_vec *v2)

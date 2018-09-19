@@ -58,7 +58,7 @@ void	gen_rays(t_data *d)
 	rot_rays(d);
 }
 
-int			test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj)
+int		test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj)
 {
 	int		ret;
 
@@ -78,7 +78,7 @@ int			test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj)
 	return (0);
 }
 
-void		start_raytracing(t_data *d)
+void	start_raytracing(t_data *d)
 {
 	float	s1;
 	float	s2;
@@ -88,6 +88,7 @@ void		start_raytracing(t_data *d)
 	float	dm;
 	t_obj	*o;
 	float	stamp;
+	t_color	c;
 
 	i = -1;
 	obj_i = 0;
@@ -126,7 +127,10 @@ void		start_raytracing(t_data *d)
 							o = d->obj[obj_i];
 					}
 					if (dm > -1)
-						put_pixel_to_image(new_dot(j, i, 0), d, d->img->str, o);
+					{
+						c = secondary_rays(get_hitpoint(d->rays[i][j], dm, d), d, o);
+						put_pixel_to_image(new_dot(j, i, 0), d, d->img->str, c);
+					}
 				}
 			}
 		}

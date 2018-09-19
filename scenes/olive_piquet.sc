@@ -17,3 +17,7 @@ object {
 	radius(20)
 	color(112, 141, 35)
 }
+
+light {
+	pos(0, 10, 10)
+}

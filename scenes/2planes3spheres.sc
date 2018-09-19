@@ -37,3 +37,7 @@ object {
 	color(137, 87, 92)
 	vector(1, 1, -0.2)
 }
+
+light {
+	pos(0, 0, 200);
+}

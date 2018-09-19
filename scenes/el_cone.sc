@@ -26,3 +26,7 @@ object {
 	angle(2)
 	color(152, 151, 136)
 }
+
+light {
+	pos(0, 0, 0)
+}

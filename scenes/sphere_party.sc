@@ -1,6 +1,6 @@
 camera{
 	pos(0, 0, 0)
-	rotation(20, 0, 0)
+	rotation(0, 0, 0)
 }
 
 object{
@@ -32,4 +32,8 @@ object{
 	radius(20)
 	pos(0,0, 100)
 	color(237, 106, 90)
+}
+
+light{
+	pos(40, -40, 0)
 }

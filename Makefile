@@ -14,6 +14,9 @@ SRCS =	main.c					\
 		new.c					\
 		quadratic.c				\
 		matrix.c				\
+		math.c					\
+		shading.c				\
+		light_impact.c			\
 
 SRCO = $(SRCS:.c=.o)
 

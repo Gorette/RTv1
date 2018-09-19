@@ -137,19 +137,24 @@ int		refresh_expose(t_data *d);
 void	start_raytracing(t_data *d);
 t_vec	two_point_vector(t_dot p1, t_dot p2);
 void	norm_vec(t_vec *to_normalize);
-void	put_pixel_to_image(t_dot d, t_data *data, char *img, t_obj *obj);
+void	put_pixel_to_image(t_dot d, t_data *data, char *img, t_color c);
 t_dot	new_dot(float x, float y, float z);
 t_vec	new_vec(float x, float y, float z);
 t_data	*new_data(void);
 t_color	new_color(int r, int g, int b, int a);
 t_img	*init_img(t_data *data);
-int		solve_sphere(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s);
 float	scalar(t_vec *v1, t_vec *v2);
+int		solve_sphere(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s);
 int		solve_plane(float *sol1, t_data *d, t_vec ray, t_obj *p);
 int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o);
 int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o);
 t_vec	trans_vec(t_vec vec, float tx, float ty, float tz);
 t_vec	rot_vec(t_vec ray, float rx, float ry, float rz);
 float	degree_to_radian(float degree);
+float	ft_clamp(float to_clamp, float min, float max);
+t_dot	get_hitpoint(t_vec vector, float d, t_data *data);
+t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj);
+int		test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj);
+int		test_light(float *s1, float *s2, t_light *l, t_vec ray, t_obj *obj);
 
 #endif

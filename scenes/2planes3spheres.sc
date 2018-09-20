@@ -41,3 +41,7 @@ object {
 light {
 	pos(0, 0, 200);
 }
+
+light {
+	pos(100, 0, 100);
+}

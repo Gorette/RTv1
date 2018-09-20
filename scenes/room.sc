@@ -138,3 +138,11 @@ object{
 light {
 	pos(20, 0, 55)
 }
+
+light {
+	pos(-20, 0, 55)
+}
+
+light {
+	pos(0, 0, 65)
+}

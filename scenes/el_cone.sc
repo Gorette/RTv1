@@ -30,3 +30,7 @@ object {
 light {
 	pos(0, 0, 0)
 }
+
+light{
+	pos(25. 85, 400)
+}

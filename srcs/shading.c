@@ -1,5 +1,21 @@
 #include "RTv1.h"
 
+float	find_right_distance(float s1, float s2, t_dot inter, t_dot light, t_vec vec)
+{
+	float	dist;
+	float	sum1;
+	float	sum2;
+
+	sum1 = fabs(inter.x - (light.x + (vec.x * s1)))
+	+ fabs(inter.y - (light.y + (vec.y * s1)))
+	+ fabs(inter.z - (light.z + (vec.z * s1)));
+	sum2 = fabs(inter.x - (light.x + (vec.x * s2)))
+	+ fabs(inter.y - (light.y + (vec.y * s2)))
+	+ fabs(inter.z - (light.z + (vec.z * s2)));
+	dist = sum1 < sum2 ? s1 : s2;
+	return (dist);
+}
+
 t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 {
 	t_dot	ld;
@@ -18,12 +34,7 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 		ld = new_dot(d->light[j]->px, d->light[j]->py, d->light[j]->pz);
 		lo = two_point_vector(ld, inter);
 		test_light(&s1, &s2, d->light[j], lo, obj);
-		if ((s2 == -1  && s1 != -1) || ((int)inter.x == (int)(ld.x + lo.x * s1)
-			&& (int)inter.y == (int)(ld.y + lo.y * s1)
-				&& (int)inter.z == (int)(ld.z + lo.z * s1)))
-			dist = s1;
-		else
-			dist = s2;
+		dist = find_right_distance(s1, s2, inter, ld, lo);
 		i = -1;
 		while (++i <= d->objects - 1)
 		{

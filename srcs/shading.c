@@ -32,7 +32,9 @@ t_color	diffuse_color(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	norm_vec(&lo);
 	diff = fabs(normale.x - lo.x) + fabs(normale.y - lo.y) + fabs(normale.z - lo.z);
 	diff = fabs(diff) * 10;
-	if (diff < 1.5)
+	if (ft_strcmp(obj->type, "plane") == 0)
+		diff = diff / 2;
+	if (diff < 1.3)
 		diff *= ((-20 / diff) / d->lights);
 	c.r = ft_clamp((c.r - diff), 0, 255);
 	c.g = ft_clamp((c.g - diff), 0, 255);

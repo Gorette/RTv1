@@ -30,15 +30,11 @@ t_color	diffuse_color(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	norm_vec(&normale);
 	lo = two_point_vector(obj_center, light_center);
 	norm_vec(&lo);
-	diff = fabs(normale.x - lo.x) + fabs(normale.y - lo.y) + fabs(normale.z - lo.z);
-	diff = fabs(diff) * 10;
-	if (ft_strcmp(obj->type, "plane") == 0)
-		diff = diff / 2;
-	if (diff < 1.3)
-		diff *= ((-20 / diff) / d->lights);
-	c.r = ft_clamp((c.r - diff), 0, 255);
-	c.g = ft_clamp((c.g - diff), 0, 255);
-	c.b = ft_clamp((c.b - diff), 0, 255);
+	diff = fabs(scalar(&normale, &lo));
+	diff *= 10;
+	c.r = (int)ft_clamp((c.r - c.r/diff), c.r - c.r / (1 + d->lights), 255);
+	c.g = (int)ft_clamp((c.g - c.g/diff), c.g - c.g / (1 + d->lights), 255);
+	c.b = (int)ft_clamp((c.b - c.b/diff), c.b - c.b / (1 + d->lights), 255);
 	return (c);
 }
 
@@ -49,16 +45,16 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 	float	dist;
 	int		i;
 	int		j;
-	int		shadowed;
 	float	s1;
 	float	s2;
 	t_color	c;
+	int		hits;
 
 	j = -1;
 	c = new_color(obj->color.r, obj->color.g, obj->color.b, 0);
+	hits = d->lights;
 	while (++j < d->lights)
 	{
-		shadowed = 0;
 		ld = new_dot(d->light[j]->px, d->light[j]->py, d->light[j]->pz);
 		lo = two_point_vector(ld, inter);
 		test_light(&s1, &s2, d->light[j], lo, obj);
@@ -70,14 +66,14 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 			{
 				if ((s1 < dist && s1 > 0) || (s2 < dist && s2 > 0))
 				{
-					c = new_color(c.r - c.r / (1 + d->lights), c.g - c.g / (1 + d->lights), c.b - c.b / (1 + d->lights), 0);
-					shadowed += 1;
+					hits--;
 					break;
 				}
 			}
 		}
-		if (shadowed == 0)
+		if (ft_strcmp(obj->type, "sphere") == 0)
 			c = diffuse_color(c, inter, obj, d, j);
 	}
+	c = new_color(c.r - c.r / (1.5 + hits), c.g - c.g / (1.5 + hits), c.b - c.b / (1.5 + hits), 0);
 	return (c);
 }

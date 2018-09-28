@@ -32,9 +32,9 @@ t_color	diffuse_color(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	norm_vec(&lo);
 	diff = fabs(scalar(&normale, &lo));
 	diff *= 10;
-	c.r = (int)ft_clamp((c.r - c.r/diff), c.r - c.r / (1 + d->lights), 255);
-	c.g = (int)ft_clamp((c.g - c.g/diff), c.g - c.g / (1 + d->lights), 255);
-	c.b = (int)ft_clamp((c.b - c.b/diff), c.b - c.b / (1 + d->lights), 255);
+	c.r = (int)ft_clamp((c.r - c.r/diff), c.r - c.r / (0.5 + d->lights), 255);
+	c.g = (int)ft_clamp((c.g - c.g/diff), c.g - c.g / (0.5 + d->lights), 255);
+	c.b = (int)ft_clamp((c.b - c.b/diff), c.b - c.b / (0.5 + d->lights), 255);
 	return (c);
 }
 
@@ -70,10 +70,11 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 					break;
 				}
 			}
+			if (ft_strcmp(obj->type, "sphere") == 0 && i == d->objects - 1)
+				c = diffuse_color(c, inter, obj, d, j);
 		}
-		if (ft_strcmp(obj->type, "sphere") == 0)
-			c = diffuse_color(c, inter, obj, d, j);
 	}
-	c = new_color(c.r - c.r / (1.5 + hits), c.g - c.g / (1.5 + hits), c.b - c.b / (1.5 + hits), 0);
+	if (hits != d->lights)
+		c = new_color(c.r - c.r / (1.5 + hits), c.g - c.g / (1.5 + hits), c.b - c.b / (1.5 + hits), 0);
 	return (c);
 }

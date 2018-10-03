@@ -16,13 +16,13 @@ float	find_right_distance(float s1, float s2, t_dot inter, t_dot light, t_vec ve
 	return (dist);
 }
 
-t_color	diffuse_color(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
+t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 {
 	t_vec	normale;
 	t_vec	lo;
 	t_dot	obj_center;
 	t_dot	light_center;
-	float	diff;
+	float	angle;
 
 	light_center = new_dot(d->light[l]->px, d->light[l]->py, d->light[l]->pz);
 	obj_center = new_dot(obj->px, obj->py, obj->pz);
@@ -30,11 +30,98 @@ t_color	diffuse_color(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	norm_vec(&normale);
 	lo = two_point_vector(obj_center, light_center);
 	norm_vec(&lo);
-	diff = fabs(scalar(&normale, &lo));
-	diff *= 10;
-	c.r = (int)ft_clamp((c.r - c.r/diff), c.r - c.r / (0.5 + d->lights), 255);
-	c.g = (int)ft_clamp((c.g - c.g/diff), c.g - c.g / (0.5 + d->lights), 255);
-	c.b = (int)ft_clamp((c.b - c.b/diff), c.b - c.b / (0.5 + d->lights), 255);
+	angle = scalar(&normale, &lo);
+	c.r = (int)ft_clamp((c.r * angle), 0, obj->color.r);
+	c.g = (int)ft_clamp((c.g * angle), 0, obj->color.g);
+	c.b = (int)ft_clamp((c.b * angle), 0, obj->color.b);
+	return (c);
+}
+
+t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
+{
+	t_vec	normale;
+	t_vec	lo;
+	t_dot	light_center;
+	float	angle;
+
+	light_center = new_dot(d->light[l]->px, d->light[l]->py, d->light[l]->pz);
+	normale = *(obj->v);
+	norm_vec(&normale);
+	lo = two_point_vector(light_center, inter);
+	norm_vec(&lo);
+	angle = fabs(scalar(&normale, &lo));
+	c.r = (int)ft_clamp((c.r * angle), 0, obj->color.r);
+	c.g = (int)ft_clamp((c.g * angle), 0, obj->color.g);
+	c.b = (int)ft_clamp((c.b * angle), 0, obj->color.b);
+	return (c);
+}
+
+t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
+{
+	t_vec	normale;
+	t_vec	lo;
+	t_dot	obj_center;
+	t_dot	light_center;
+	float	angle;
+
+	light_center = new_dot(d->light[l]->px, d->light[l]->py, d->light[l]->pz);
+	obj_center = new_dot(obj->px, obj->py, obj->pz);
+	normale = two_point_vector(obj_center, inter);
+	norm_vec(&normale);
+	lo = two_point_vector(light_center, inter);
+	norm_vec(&lo);
+	angle = fabs(scalar(&normale, &lo));
+	angle = 1 - angle;
+	c.r = (int)ft_clamp((c.r * angle), 0, obj->color.r);
+	c.g = (int)ft_clamp((c.g * angle), 0, obj->color.g);
+	c.b = (int)ft_clamp((c.b * angle), 0, obj->color.b);
+	return (c);
+}
+
+/*t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
+{
+	t_vec	normale;
+	t_vec	lo;
+	t_dot	obj_center;
+	t_dot	light_center;
+	t_dot	axis_dot;
+	float	dist;
+	float	angle;
+
+	light_center = new_dot(d->light[l]->px, d->light[l]->py, d->light[l]->pz);
+	obj_center = new_dot(obj->px, obj->py, obj->pz);
+	dist = fabs(two_point_dist(inter, obj_center));
+	axis_dot = new_dot(obj->px + dist * obj->rx, obj->py + dist * obj->py,
+		obj->pz + dist);
+	normale = two_point_vector(inter, axis_dot);
+	norm_vec(&normale);
+	lo = two_point_vector(light_center, inter);
+	norm_vec(&lo);
+	angle = fabs(scalar(&normale, &lo));
+	c.r = (int)ft_clamp((c.r * angle), 0, obj->color.r);
+	c.g = (int)ft_clamp((c.g * angle), 0, obj->color.g);
+	c.b = (int)ft_clamp((c.b * angle), 0, obj->color.b);
+	return (c);
+}*/
+
+t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
+{
+	t_vec	normale;
+	t_vec	lo;
+	t_dot	obj_center;
+	t_dot	light_center;
+	float	angle;
+
+	light_center = new_dot(d->light[l]->px, d->light[l]->py, d->light[l]->pz);
+	obj_center = new_dot(obj->px, obj->py, obj->pz);
+	normale = two_point_vector(obj_center, inter);
+	norm_vec(&normale);
+	lo = two_point_vector(light_center, inter);
+	norm_vec(&lo);
+	angle = fabs(scalar(&normale, &lo));
+	c.r = (int)ft_clamp((c.r * angle), 0, obj->color.r);
+	c.g = (int)ft_clamp((c.g * angle), 0, obj->color.g);
+	c.b = (int)ft_clamp((c.b * angle), 0, obj->color.b);
 	return (c);
 }
 
@@ -71,10 +158,16 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 				}
 			}
 			if (ft_strcmp(obj->type, "sphere") == 0 && i == d->objects - 1)
-				c = diffuse_color(c, inter, obj, d, j);
+				c = diffuse_sphere(c, inter, obj, d, j);
+			if (ft_strcmp(obj->type, "plane") == 0 && i == d->objects - 1)
+				c = diffuse_plane(c, inter, obj, d, j);
+			if (ft_strcmp(obj->type, "cone") == 0 && i == d->objects - 1)
+				c = diffuse_cone(c, inter, obj, d, j);
+			if (ft_strcmp(obj->type, "cylinder") == 0 && i == d->objects - 1)
+				c = diffuse_cylinder(c, inter, obj, d, j);
 		}
 	}
 	if (hits != d->lights)
-		c = new_color(c.r - c.r / (1.5 + hits), c.g - c.g / (1.5 + hits), c.b - c.b / (1.5 + hits), 0);
+		c = new_color(c.r - c.r / (1 + hits), c.g - c.g / (1 + hits), c.b - c.b / (1 + hits), 0);
 	return (c);
 }

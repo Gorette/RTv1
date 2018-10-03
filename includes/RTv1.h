@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:05:33 by axbal             #+#    #+#             */
-/*   Updated: 2018/09/14 13:09:00 by axbal            ###   ########.fr       */
+/*   Updated: 2018/10/03 13:34:09 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,6 @@ t_dot	get_hitpoint(t_vec vector, float d, t_data *data);
 t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj);
 int		test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj);
 int		test_light(float *s1, float *s2, t_light *l, t_vec ray, t_obj *obj);
+float	two_point_dist(t_dot p1, t_dot p2);
 
 #endif

@@ -5,12 +5,12 @@ camera {
 
 object {
 	type(cylinder)
-	pos(0,0,50)
+	pos(0,0,30)
 	radius(10)
 	rotation(90,0)
 	color(237,148,156)
 }
 
 light {
-	pos(-50,0,10)
+	pos(-80,0,0)
 }

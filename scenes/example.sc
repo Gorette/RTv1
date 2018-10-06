@@ -1,35 +1,45 @@
 camera {
-	pos(58.3,7.3,2.3)
-	rotation(3,2,1)
+	pos(80,10,15)
+	rotation(10,-80,0)
 }
 
 object {
 	type(sphere)
-	pos(x,y,z)
-	radius(x)
-	color(r,g,b)
+	pos(-5,-5,30)
+	radius(10)
+	color(255,0,0)
 }
 
 object {
 	type(cylinder)
-	pos(x,y,z)
-	radius(x)
-	rotation(x,y)
+	pos(0,10,32)
+	radius(6)
+	rotation(90,-45)
+	color(0,255,0)
 }
 
 object {
 	type(cone)
-	pos(x,y,z)
-	angle(x)
-	rotation(x,y)
+	pos(5,0,30)
+	angle(20)
+	rotation(90,45)
+	color(255,255,0)
 }
 
 object {
 	type(plane)
-	pos(x,y,z)
-	vector(x,y,z)
+	pos(0,0,80)
+	vector(-1,0,4)
+	color(0,0,255)
+}
+
+object {
+	type(plane)
+	pos(0,-15,0)
+	vector(0,1,0)
+	color(195,195,195)
 }
 
 light {
-	pos(12.2,21,4.3)
+	pos(40,0,-50)
 }

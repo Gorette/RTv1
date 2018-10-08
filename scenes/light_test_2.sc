@@ -11,5 +11,5 @@ object {
 }
 
 light {
-	pos(0,0,50)
+	pos(0,0,80)
 }

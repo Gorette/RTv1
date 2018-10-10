@@ -135,6 +135,10 @@ object{
 	color(189, 215, 168)
 }
 
-light {
-	pos(0, 15, 55)
+light{
+	pos(-10,15,55)
+}
+
+light{
+	pos(10,15,55)
 }

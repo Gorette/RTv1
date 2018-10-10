@@ -32,9 +32,9 @@ t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	lo = two_point_vector(obj_center, light_center);
 	norm_vec(&lo);
 	angle = fabs(scalar(&normale, &lo));
-	c.r = (int)ft_clamp((c.r * angle), 0, obj->color.r);
-	c.g = (int)ft_clamp((c.g * angle), 0, obj->color.g);
-	c.b = (int)ft_clamp((c.b * angle), 0, obj->color.b);
+	c.r += (int)ft_clamp(((obj->color.r / d->lights) * angle), 0, obj->color.r);
+	c.g += (int)ft_clamp(((obj->color.g / d->lights) * angle), 0, obj->color.g);
+	c.b += (int)ft_clamp(((obj->color.b / d->lights) * angle), 0, obj->color.b);
 	return (c);
 }
 
@@ -51,9 +51,9 @@ t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	lo = two_point_vector(light_center, inter);
 	norm_vec(&lo);
 	angle = fabs(scalar(&normale, &lo));
-	c.r = (int)ft_clamp((c.r * angle), 0, obj->color.r);
-	c.g = (int)ft_clamp((c.g * angle), 0, obj->color.g);
-	c.b = (int)ft_clamp((c.b * angle), 0, obj->color.b);
+	c.r += (int)ft_clamp(((obj->color.r / d->lights) * angle), 0, obj->color.r);
+	c.g += (int)ft_clamp(((obj->color.g / d->lights) * angle), 0, obj->color.g);
+	c.b += (int)ft_clamp(((obj->color.b / d->lights) * angle), 0, obj->color.b);
 	return (c);
 }
 
@@ -78,9 +78,9 @@ t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	lo = two_point_vector(affixe, new_dot(lc.x, lc.y, lc.z));
 	norm_vec(&lo);
 	angle = fabs(scalar(&normale, &lo));
-	c.r = (int)ft_clamp((c.r * angle), 0, obj->color.r);
-	c.g = (int)ft_clamp((c.g * angle), 0, obj->color.g);
-	c.b = (int)ft_clamp((c.b * angle), 0, obj->color.b);
+	c.r += (int)ft_clamp(((obj->color.r / d->lights) * angle), 0, obj->color.r);
+	c.g += (int)ft_clamp(((obj->color.g / d->lights) * angle), 0, obj->color.g);
+	c.b += (int)ft_clamp(((obj->color.b / d->lights) * angle), 0, obj->color.b);
 	return (c);
 }
 
@@ -105,9 +105,9 @@ t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	lo = two_point_vector(affixe, new_dot(lc.x, lc.y, lc.z));
 	norm_vec(&lo);
 	angle = fabs(scalar(&normale, &lo));
-	c.r = (int)ft_clamp((c.r * angle), 0, obj->color.r);
-	c.g = (int)ft_clamp((c.g * angle), 0, obj->color.g);
-	c.b = (int)ft_clamp((c.b * angle), 0, obj->color.b);
+	c.r += (int)ft_clamp(((obj->color.r / d->lights) * angle), 0, obj->color.r);
+	c.g += (int)ft_clamp(((obj->color.g / d->lights) * angle), 0, obj->color.g);
+	c.b += (int)ft_clamp(((obj->color.b / d->lights) * angle), 0, obj->color.b);
 	return (c);
 }
 
@@ -124,7 +124,8 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 	int		hits;
 
 	j = -1;
-	c = new_color(obj->color.r, obj->color.g, obj->color.b, 0);
+	c = d->lights > 0 ? new_color(0, 0, 0, 0) :
+		new_color(obj->color.r, obj->color.g, obj->color.b, 0);
 	hits = d->lights;
 	while (++j < d->lights)
 	{
@@ -153,7 +154,5 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 				c = diffuse_cylinder(c, inter, obj, d, j);
 		}
 	}
-	if (hits != d->lights)
-		c = new_color(c.r - c.r / (1 + hits), c.g - c.g / (1 + hits), c.b - c.b / (1 + hits), 0);
 	return (c);
 }

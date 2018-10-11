@@ -16,3 +16,8 @@ float	two_point_dist(t_dot p1, t_dot p2)
 	dist = pow(p2.x - p1.x, 2) + pow(p2.y - p2.y, 2) + pow(p2.z - p2.z, 2);
 	return (dist);
 }
+
+float	degree_to_radian(float degree)
+{
+	return (degree * M_PI / 180.0);
+}

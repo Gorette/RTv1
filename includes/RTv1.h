@@ -157,5 +157,9 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj);
 int		test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj);
 int		test_light(float *s1, float *s2, t_light *l, t_vec ray, t_obj *obj);
 float	two_point_dist(t_dot p1, t_dot p2);
+t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d, int l);
+t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d, int l);
+t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d, int l);
+t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d, int l);
 
 #endif

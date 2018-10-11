@@ -17,6 +17,7 @@ SRCS =	main.c					\
 		math.c					\
 		shading.c				\
 		light_impact.c			\
+		diffuse.c				\
 
 SRCO = $(SRCS:.c=.o)
 

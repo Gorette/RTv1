@@ -69,7 +69,6 @@ t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 {
 	t_vec	normale;
-	t_vec	lo;
 	t_vec	lc;
 	t_vec	a_dot;
 	t_dot	affixe;
@@ -84,9 +83,9 @@ t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	affixe = new_dot(0, 0, a_dot.z);
 	normale = two_point_vector(affixe, new_dot(a_dot.x, a_dot.y, a_dot.z));
 	norm_vec(&normale);
-	lo = two_point_vector(affixe, new_dot(lc.x, lc.y, lc.z));
-	norm_vec(&lo);
-	angle = fabs(scalar(&normale, &lo));
+	lc = two_point_vector(affixe, new_dot(lc.x, lc.y, lc.z));
+	norm_vec(&lc);
+	angle = fabs(scalar(&normale, &lc));
 	c.r += (int)ft_clamp(((obj->color.r / d->lights) * angle), 0, obj->color.r);
 	c.g += (int)ft_clamp(((obj->color.g / d->lights) * angle), 0, obj->color.g);
 	c.b += (int)ft_clamp(((obj->color.b / d->lights) * angle), 0, obj->color.b);

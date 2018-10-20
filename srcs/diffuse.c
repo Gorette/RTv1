@@ -1,6 +1,6 @@
 #include "RTv1.h"
 
-t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
+t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d)
 {
 	t_vec	normale;
 	t_vec	lo;
@@ -8,7 +8,7 @@ t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	t_dot	light_center;
 	float	angle;
 
-	light_center = new_dot(d->light[l]->px, d->light[l]->py, d->light[l]->pz);
+	light_center = new_dot(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
 	obj_center = new_dot(obj->px, obj->py, obj->pz);
 	normale = two_point_vector(obj_center, inter);
 	norm_vec(&normale);
@@ -21,14 +21,14 @@ t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	return (c);
 }
 
-t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
+t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d)
 {
 	t_vec	normale;
 	t_vec	lo;
 	t_dot	light_center;
 	float	angle;
 
-	light_center = new_dot(d->light[l]->px, d->light[l]->py, d->light[l]->pz);
+	light_center = new_dot(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
 	normale = *(obj->v);
 	norm_vec(&normale);
 	lo = two_point_vector(light_center, inter);
@@ -40,7 +40,7 @@ t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	return (c);
 }
 
-t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
+t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d)
 {
 	t_vec	normale;
 	t_vec	lc;
@@ -48,7 +48,7 @@ t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	t_dot	affixe;
 	float	angle;
 
-	lc = new_vec(d->light[l]->px, d->light[l]->py, d->light[l]->pz);
+	lc = new_vec(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
 	lc = trans_vec(lc, obj->px, obj->py, obj->pz);
 	lc = rot_vec(lc, obj->rx, obj->ry, 0);
 	a_dot = new_vec(inter.x, inter.y, inter.z);
@@ -66,7 +66,7 @@ t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	return (c);
 }
 
-t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
+t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d)
 {
 	t_vec	normale;
 	t_vec	lc;
@@ -74,7 +74,7 @@ t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d, int l)
 	t_dot	affixe;
 	float	angle;
 
-	lc = new_vec(d->light[l]->px, d->light[l]->py, d->light[l]->pz);
+	lc = new_vec(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
 	lc = trans_vec(lc, obj->px, obj->py, obj->pz);
 	lc = rot_vec(lc, obj->rx, obj->ry, 0);
 	a_dot = new_vec(inter.x, inter.y, inter.z);

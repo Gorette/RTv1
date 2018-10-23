@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   diffuse.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/23 16:05:31 by axbal             #+#    #+#             */
+/*   Updated: 2018/10/23 16:05:33 by axbal            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "RTv1.h"
 
 t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d)
@@ -5,14 +17,14 @@ t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d)
 	t_vec	normale;
 	t_vec	lo;
 	t_dot	obj_center;
-	t_dot	light_center;
+	t_dot	lc;
 	float	angle;
 
-	light_center = new_dot(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
+	lc = new_dot(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
 	obj_center = new_dot(obj->px, obj->py, obj->pz);
 	normale = two_point_vector(obj_center, inter);
 	norm_vec(&normale);
-	lo = two_point_vector(obj_center, light_center);
+	lo = two_point_vector(obj_center, lc);
 	norm_vec(&lo);
 	angle = fabs(scalar(&normale, &lo));
 	c.r += (int)ft_clamp(((obj->color.r / d->lights) * angle), 0, obj->color.r);
@@ -25,13 +37,13 @@ t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d)
 {
 	t_vec	normale;
 	t_vec	lo;
-	t_dot	light_center;
+	t_dot	lc;
 	float	angle;
 
-	light_center = new_dot(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
+	lc = new_dot(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
 	normale = *(obj->v);
 	norm_vec(&normale);
-	lo = two_point_vector(light_center, inter);
+	lo = two_point_vector(lc, inter);
 	norm_vec(&lo);
 	angle = fabs(scalar(&normale, &lo));
 	c.r += (int)ft_clamp(((obj->color.r / d->lights) * angle), 0, obj->color.r);

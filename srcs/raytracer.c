@@ -26,7 +26,8 @@ void	rot_rays(t_data *d)
 		j = 0;
 		while (j < LA)
 		{
-			d->rays[i][j] = rot_vec(d->rays[i][j], d->cam->rx, d->cam->ry, d->cam->rz);
+			d->rays[i][j] = rot_vec(d->rays[i][j], d->cam->rx, d->cam->ry,
+				d->cam->rz);
 			j++;
 		}
 		i++;

@@ -157,7 +157,7 @@ float	ft_clamp(float to_clamp, float min, float max);
 t_dot	get_hitpoint(t_vec vector, float d, t_data *data);
 t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj);
 int		test_object(t_data *d, t_vec ray, t_obj *obj);
-int		test_light(float *s1, float *s2, t_light *l, t_vec ray, t_obj *obj);
+int		test_light(t_data *d, t_light *l, t_vec ray, t_obj *obj);
 float	two_point_dist(t_dot p1, t_dot p2);
 t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d);
 t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d);

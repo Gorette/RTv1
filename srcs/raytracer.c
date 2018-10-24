@@ -125,13 +125,13 @@ void	start_raytracing(t_data *d)
 						if (stamp != dm)
 							o = d->obj[obj_i];
 					}
-					if (dm > -1)
-					{
-						c = secondary_rays(get_hitpoint(d->rays[i][j], dm, d), d, o);
-						put_pixel_to_image(new_dot(j, i, 0), d, d->img->str, c);
-					}
 				}
 			}
+			if (dm > -1)
+			{
+				c = secondary_rays(get_hitpoint(d->rays[i][j], dm, d), d, o);
+						put_pixel_to_image(new_dot(j, i, 0), d, d->img->str, c);
 		}
 	}
+}
 }

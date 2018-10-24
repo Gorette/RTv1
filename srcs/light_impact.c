@@ -12,7 +12,7 @@
 
 #include "RTv1.h"
 
-int		light_cyli(float *sol1, float *sol2, t_light *l, t_vec ray, t_obj *o)
+int		light_cyli(t_data *d, t_light *l, t_vec ray, t_obj *o)
 {
 	t_dot	q;
 	t_vec	p;
@@ -29,16 +29,16 @@ int		light_cyli(float *sol1, float *sol2, t_light *l, t_vec ray, t_obj *o)
 	if (delta < 0)
 		return (-1);
 	else if (delta == 0)
-		*sol1 = -q.y / (2 * q.x);
+		d->t[0] = -q.y / (2 * q.x);
 	else if (delta > 0)
 	{
-		*sol1 = (-q.y - sqrt(delta)) / (2 * q.x);
-		*sol2 = (-q.y + sqrt(delta)) / (2 * q.x);
+		d->t[0] = (-q.y - sqrt(delta)) / (2 * q.x);
+		d->t[1] = (-q.y + sqrt(delta)) / (2 * q.x);
 	}
 	return (1);
 }
 
-int		light_cone(float *sol1, float *sol2, t_light *l, t_vec ray, t_obj *o)
+int		light_cone(t_data *d, t_light *l, t_vec ray, t_obj *o)
 {
 	t_dot	q;
 	t_vec	p;
@@ -55,32 +55,32 @@ int		light_cone(float *sol1, float *sol2, t_light *l, t_vec ray, t_obj *o)
 	if (delta < 0)
 		return (-1);
 	else if (delta == 0)
-		*sol1 = -q.y / (2 * q.x);
+		d->t[0] = -q.y / (2 * q.x);
 	else if (delta > 0)
 	{
-		*sol1 = (-q.y - sqrt(delta)) / (2 * q.x);
-		*sol2 = (-q.y + sqrt(delta)) / (2 * q.x);
+		d->t[0] = (-q.y - sqrt(delta)) / (2 * q.x);
+		d->t[1] = (-q.y + sqrt(delta)) / (2 * q.x);
 	}
 	return (1);
 }
 
-int		light_plane(float *sol1, t_light *l, t_vec ray, t_obj *p)
+int		light_plane(t_data *d, t_light *l, t_vec ray, t_obj *p)
 {
 	float	q;
 
 	if (scalar(p->v, &ray) != 0)
 	{
 		q = -(p->v->x * p->px + p->v->y * p->py + p->v->z * p->pz);
-		*sol1 = (-(p->v->x * l->px) - p->v->y * l->py - p->v->z
+		d->t[0] = (-(p->v->x * l->px) - p->v->y * l->py - p->v->z
 		* l->pz - q) / (ray.x * p->v->x + ray.y * p->v->y + ray.z * p->v->z);
-		if (*sol1 < 0)
+		if (d->t[0] < 0)
 			return (-1);
 		return (1);
 	}
 	return (-1);
 }
 
-int		light_sphere(float *sol1, float *sol2, t_light *l, t_vec ray, t_obj *s)
+int		light_sphere(t_data *d, t_light *l, t_vec ray, t_obj *s)
 {
 	float	a;
 	float	b;
@@ -97,31 +97,31 @@ int		light_sphere(float *sol1, float *sol2, t_light *l, t_vec ray, t_obj *s)
 	if (delta < 0)
 		return (-1);
 	if (delta == 0)
-		*sol1 = -b / (2 * a);
+		d->t[0] = -b / (2 * a);
 	else if (delta > 0)
 	{
-		*sol1 = (-b - sqrt(delta)) / (2 * a);
-		*sol2 = (-b + sqrt(delta)) / (2 * a);
+		d->t[0] = (-b - sqrt(delta)) / (2 * a);
+		d->t[1] = (-b + sqrt(delta)) / (2 * a);
 	}
 	return (1);
 }
 
-int		test_light(float *s1, float *s2, t_light *l, t_vec ray, t_obj *obj)
+int		test_light(t_data *d, t_light *l, t_vec ray, t_obj *obj)
 {
 	int		ret;
 
-	*s1 = -1;
-	*s2 = -1;
+	d->t[0] = -1;
+	d->t[1] = -1;
 	ret = 0;
 	if (ft_strcmp(obj->type, "sphere") == 0)
-		ret = light_sphere(s1, s2, l, ray, obj);
+		ret = light_sphere(d, l, ray, obj);
 	if (ft_strcmp(obj->type, "plane") == 0)
-		ret = light_plane(s1, l, ray, obj);
+		ret = light_plane(d, l, ray, obj);
 	if (ft_strcmp(obj->type, "cylinder") == 0)
-		ret = light_cyli(s1, s2, l, ray, obj);
+		ret = light_cyli(d, l, ray, obj);
 	if (ft_strcmp(obj->type, "cone") == 0)
-		ret = light_cone(s1, s2, l, ray, obj);
-	if (ret == 1 && (*s1 >= 0 || *s2 >= 0))
+		ret = light_cone(d, l, ray, obj);
+	if (ret == 1 && (d->t[0] >= 0 || d->t[1] >= 0))
 		return (1);
 	return (0);
 }

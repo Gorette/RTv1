@@ -44,6 +44,8 @@ t_data		*new_data(void)
 	new->rays = NULL;
 	new->lights = 0;
 	new->objects = 0;
+	if (!(new->t = (float *)malloc(sizeof(float) * 2)))
+		ft_fail("Error: Could not allocate memory", NULL);
 	if (!(new->mlx_ptr = mlx_init()))
 		ft_fail("Error: Connection failed.", NULL);
 	if (!(new->win_ptr = mlx_new_window(new->mlx_ptr, LA, HA, "rtv1")))

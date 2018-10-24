@@ -59,30 +59,28 @@ void	gen_rays(t_data *d)
 	rot_rays(d);
 }
 
-int		test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj)
+int		test_object(t_data *d, t_vec ray, t_obj *obj)
 {
 	int		ret;
 
-	*s1 = -1;
-	*s2 = -1;
+	d->t[0] = -1;
+	d->t[1] = -1;
 	ret = 0;
 	if (ft_strcmp(obj->type, "sphere") == 0)
-		ret = solve_sphere(s1, s2, d, ray, obj);
+		ret = solve_sphere(d, ray, obj);
 	if (ft_strcmp(obj->type, "plane") == 0)
-		ret = solve_plane(s1, d, ray, obj);
+		ret = solve_plane(d, ray, obj);
 	if (ft_strcmp(obj->type, "cylinder") == 0)
-		ret = solve_cyli(s1, s2, d, ray, obj);
+		ret = solve_cyli(d, ray, obj);
 	if (ft_strcmp(obj->type, "cone") == 0)
-		ret = solve_cone(s1, s2, d, ray, obj);
-	if (ret == 1 && (*s1 >= 0 || *s2 >= 0))
+		ret = solve_cone(d, ray, obj);
+	if (ret == 1 && (d->t[0] >= 0 || d->t[1] >= 0))
 		return (1);
 	return (0);
 }
 
 void	start_raytracing(t_data *d)
 {
-	float	s1;
-	float	s2;
 	int		obj_i;
 	int		i;
 	int		j;
@@ -104,25 +102,25 @@ void	start_raytracing(t_data *d)
 			obj_i = -1;
 			while (++obj_i <= d->objects - 1)
 			{
-				if (test_object(&s1, &s2, d, d->rays[i][j],
+				if (test_object(d, d->rays[i][j],
 					d->obj[obj_i]) > 0)
 				{
 					stamp = dm;
-					if (dm == -1 || (s1 < dm && s1 >= 0) || (s2 < dm && s2 >= 0))
+					if (dm == -1 || (d->t[0] < dm && d->t[0] >= 0) || (d->t[1] < dm && d->t[1] >= 0))
 					{
 						if (dm == -1)
 						{
-							if (s1 >= 0)
-								dm = s1;
-							if (s2 >= 0)
-								dm = s1 < s2 ? dm : s2;
+							if (d->t[0] >= 0)
+								dm = d->t[0];
+							if (d->t[1] >= 0)
+								dm = d->t[0] < d->t[1] ? dm : d->t[1];
 						}
 						else
 						{
-							if (s1 >= 0 && s1 < dm)
-								dm = s1;
-							if (s2 >= 0 && s2 < s1 && s2 < dm)
-								dm = s2;
+							if (d->t[0] >= 0 && d->t[0] < dm)
+								dm = d->t[0];
+							if (d->t[1] >= 0 && d->t[1] < d->t[0] && d->t[1] < dm)
+								dm = d->t[1];
 						}
 						if (stamp != dm)
 							o = d->obj[obj_i];

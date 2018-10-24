@@ -12,7 +12,7 @@
 
 #include "RTv1.h"
 
-int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
+int		solve_cyli(t_data *d, t_vec ray, t_obj *o)
 {
 	t_dot	q;
 	t_vec	p;
@@ -29,16 +29,16 @@ int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 	if (delta < 0)
 		return (-1);
 	else if (delta == 0)
-		*sol1 = -q.y / (2 * q.x);
+		d->t[0] = -q.y / (2 * q.x);
 	else if (delta > 0)
 	{
-		*sol1 = (-q.y - sqrt(delta)) / (2 * q.x);
-		*sol2 = (-q.y + sqrt(delta)) / (2 * q.x);
+		d->t[0] = (-q.y - sqrt(delta)) / (2 * q.x);
+		d->t[1] = (-q.y + sqrt(delta)) / (2 * q.x);
 	}
 	return (1);
 }
 
-int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
+int		solve_cone(t_data *d, t_vec ray, t_obj *o)
 {
 	t_dot	q;
 	t_vec	p;
@@ -55,33 +55,33 @@ int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o)
 	if (delta < 0)
 		return (-1);
 	else if (delta == 0)
-		*sol1 = -q.y / (2 * q.x);
+		d->t[0] = -q.y / (2 * q.x);
 	else if (delta > 0)
 	{
-		*sol1 = (-q.y - sqrt(delta)) / (2 * q.x);
-		*sol2 = (-q.y + sqrt(delta)) / (2 * q.x);
+		d->t[0] = (-q.y - sqrt(delta)) / (2 * q.x);
+		d->t[1] = (-q.y + sqrt(delta)) / (2 * q.x);
 	}
 	return (1);
 }
 
-int		solve_plane(float *sol1, t_data *d, t_vec ray, t_obj *p)
+int		solve_plane(t_data *d, t_vec ray, t_obj *p)
 {
 	float	q;
 
 	if (scalar(p->v, &ray) != 0)
 	{
 		q = -(p->v->x * p->px + p->v->y * p->py + p->v->z * p->pz);
-		*sol1 = (-(p->v->x * d->cam->px) - p->v->y * d->cam->py -
+		d->t[0] = (-(p->v->x * d->cam->px) - p->v->y * d->cam->py -
 			p->v->z * d->cam->pz - q) / (ray.x * p->v->x + ray.y * p->v->y +
 				ray.z * p->v->z);
-		if (*sol1 < 0)
+		if (d->t[0] < 0)
 			return (-1);
 		return (1);
 	}
 	return (-1);
 }
 
-int		solve_sphere(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s)
+int		solve_sphere(t_data *d, t_vec ray, t_obj *s)
 {
 	float	a;
 	float	b;
@@ -98,11 +98,11 @@ int		solve_sphere(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s)
 	if (delta < 0)
 		return (-1);
 	if (delta == 0)
-		*sol1 = -b / (2 * a);
+		d->t[0] = -b / (2 * a);
 	else if (delta > 0)
 	{
-		*sol1 = (-b - sqrt(delta)) / (2 * a);
-		*sol2 = (-b + sqrt(delta)) / (2 * a);
+		d->t[0] = (-b - sqrt(delta)) / (2 * a);
+		d->t[1] = (-b + sqrt(delta)) / (2 * a);
 	}
 	return (1);
 }

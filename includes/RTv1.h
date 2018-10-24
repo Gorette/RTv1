@@ -111,6 +111,7 @@ typedef struct		s_data
 	float			s_xmax;
 	float			s_ymax;
 	int				l;
+	float			*t;
 }					t_data;
 
 
@@ -145,17 +146,17 @@ t_data	*new_data(void);
 t_color	new_color(int r, int g, int b, int a);
 t_img	*init_img(t_data *data);
 float	scalar(t_vec *v1, t_vec *v2);
-int		solve_sphere(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *s);
-int		solve_plane(float *sol1, t_data *d, t_vec ray, t_obj *p);
-int		solve_cyli(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o);
-int		solve_cone(float *sol1, float *sol2, t_data *d, t_vec ray, t_obj *o);
+int		solve_sphere(t_data *d, t_vec ray, t_obj *s);
+int		solve_plane(t_data *d, t_vec ray, t_obj *p);
+int		solve_cyli(t_data *d, t_vec ray, t_obj *o);
+int		solve_cone(t_data *d, t_vec ray, t_obj *o);
 t_vec	trans_vec(t_vec vec, float tx, float ty, float tz);
 t_vec	rot_vec(t_vec ray, float rx, float ry, float rz);
 float	degree_to_radian(float degree);
 float	ft_clamp(float to_clamp, float min, float max);
 t_dot	get_hitpoint(t_vec vector, float d, t_data *data);
 t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj);
-int		test_object(float *s1, float *s2, t_data *d, t_vec ray, t_obj *obj);
+int		test_object(t_data *d, t_vec ray, t_obj *obj);
 int		test_light(float *s1, float *s2, t_light *l, t_vec ray, t_obj *obj);
 float	two_point_dist(t_dot p1, t_dot p2);
 t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d);

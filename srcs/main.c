@@ -62,7 +62,7 @@ int			main(int argc, char **argv)
 	if (data->objects != 0 && data->cam != NULL)
 		start_raytracing(data);
 	if (data->objects < 1 && data->cam != NULL)
-		ft_putstr_fd("No object to draw! Enjoy the black screen.", 2);
+		ft_putstr_fd("No object to draw! Enjoy the black screen.\n", 2);
 	if (data->cam == NULL)
 		ft_fail("Error: No valid camera. Cannot draw the scene.", data);
 	let_mlx_loop(data);

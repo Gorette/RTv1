@@ -91,8 +91,7 @@ int		read_file(t_data *data, char *file)
 		if (object != NULL)
 		{
 			select += ft_strlen(object);
-			if ((read_new_object(data, object, file, select)) > 0)
-				;
+			read_new_object(data, object, file, select);
 			free(object);
 		}
 		select++;

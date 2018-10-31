@@ -11,9 +11,5 @@ object {
 }
 
 light {
-	pos(100,-50,50)
-}
-
-light {
 	pos(100,50,50)
 }

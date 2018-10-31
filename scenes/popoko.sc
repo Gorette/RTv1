@@ -4,21 +4,13 @@ camera {
 }
 
 light {
-	pos(-21, 0, 29)
-}
-
-object {
-	type(sphere)
-	pos(-10, -15, 30)
-	radius(7)
-	color(254,195,172)
+	pos(-24, 0, 10)
 }
 
 object {
 	type(sphere)
 	pos(20, -23, 20)
 	radius(9)
-	color(254,195,172)
 }
 
 object {
@@ -40,5 +32,4 @@ object {
 	pos(0,35,30)
 	rotation(90,0)
 	angle(4)
-	color(254,195,172)
 }

@@ -11,15 +11,18 @@ object {
 }
 
 object {
-	type(undefined)
-	pos(10,10,10)
-}
-
-object {
 	type(plane)
 	pos(0,-1,200)
 	vector(-10,-10,-10)
 	color(125,149,238)
+}
+
+object {
+	type(cone)
+	pos(5,0,30)
+	angle(20)
+	rotation(90,45)
+	color(255,255,0)
 }
 
 light {

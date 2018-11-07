@@ -24,12 +24,10 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 	float	dist;
 	int		i;
 	t_color	c;
-	int		hits;
 
 	d->l = -1;
 	c = d->lights > 0 ? new_color(0, 0, 0, 0) :
 		new_color(obj->color.r, obj->color.g, obj->color.b, 0);
-	hits = d->lights;
 	while (++(d->l) < d->lights)
 	{
 		ld = new_dot(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
@@ -43,10 +41,7 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 			{
 				if ((d->t[0] < dist && d->t[0] > 0) || (d->t[1] < dist
 					&& d->t[1] > 0))
-				{
-					hits--;
 					break;
-				}
 			}
 			if (ft_strcmp(obj->type, "sphere") == 0 && i == d->objects - 1)
 				c = diffuse_sphere(c, inter, obj, d);

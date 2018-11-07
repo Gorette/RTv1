@@ -23,7 +23,7 @@ SRCO = $(SRCS:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
-FRMW = -framework OpenGL -framework Appkit -lpthread
+FRMW = -framework OpenGL -framework Appkit
 
 LIB =	./libft/libft.a			\
 		./mlx/libmlx.a	\

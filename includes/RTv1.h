@@ -16,7 +16,6 @@
 # include "../libft/includes/libft.h"
 # include "../mlx/mlx.h"
 # include <math.h>
-# include <pthread.h>
 # include <fcntl.h>
 
 # define LA 896
@@ -112,6 +111,7 @@ typedef struct		s_data
 	float			s_ymax;
 	int				l;
 	float			*t;
+	int				stop;
 }					t_data;
 
 
@@ -163,5 +163,7 @@ t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d);
 t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d);
 t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d);
 t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d);
+float	compare_vectors(t_vec v1, t_vec v2);
+t_color		color_interp(t_color c1, t_color c2, float factor);
 
 #endif

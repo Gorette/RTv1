@@ -20,6 +20,7 @@ t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d)
 	t_dot	lc;
 	float	angle;
 
+	d->stop = 1;
 	lc = new_dot(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
 	obj_center = new_dot(obj->px, obj->py, obj->pz);
 	normale = two_point_vector(obj_center, inter);
@@ -30,6 +31,10 @@ t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d)
 	c.r += (int)ft_clamp(((obj->color.r / d->lights) * angle), 0, obj->color.r);
 	c.g += (int)ft_clamp(((obj->color.g / d->lights) * angle), 0, obj->color.g);
 	c.b += (int)ft_clamp(((obj->color.b / d->lights) * angle), 0, obj->color.b);
+	if ((angle = compare_vectors(normale, lo)) >= 0 && angle < 0.2)
+		return (color_interp(new_color(obj->color.r, obj->color.g,
+			obj->color.b, 0), new_color(255, 255, 255, 0), angle * 9));
+	d->stop = 0;
 	return (c);
 }
 
@@ -60,6 +65,7 @@ t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d)
 	t_dot	affixe;
 	float	angle;
 
+	d->stop = 1;
 	lc = new_vec(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
 	lc = trans_vec(lc, obj->px, obj->py, obj->pz);
 	lc = rot_vec(lc, obj->rx, obj->ry, 0);
@@ -75,6 +81,10 @@ t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d)
 	c.r += (int)ft_clamp(((obj->color.r / d->lights) * angle), 0, obj->color.r);
 	c.g += (int)ft_clamp(((obj->color.g / d->lights) * angle), 0, obj->color.g);
 	c.b += (int)ft_clamp(((obj->color.b / d->lights) * angle), 0, obj->color.b);
+	if ((angle = compare_vectors(normale, lc)) >= 0 && angle < 0.2)
+		return (color_interp(new_color(obj->color.r, obj->color.g,
+			obj->color.b, 0), new_color(255, 255, 255, 0), angle * 9));
+	d->stop = 0;
 	return (c);
 }
 
@@ -86,6 +96,7 @@ t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d)
 	t_dot	affixe;
 	float	angle;
 
+	d->stop = 1;
 	lc = new_vec(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
 	lc = trans_vec(lc, obj->px, obj->py, obj->pz);
 	lc = rot_vec(lc, obj->rx, obj->ry, 0);
@@ -101,5 +112,9 @@ t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d)
 	c.r += (int)ft_clamp(((obj->color.r / d->lights) * angle), 0, obj->color.r);
 	c.g += (int)ft_clamp(((obj->color.g / d->lights) * angle), 0, obj->color.g);
 	c.b += (int)ft_clamp(((obj->color.b / d->lights) * angle), 0, obj->color.b);
+	if ((angle = compare_vectors(normale, lc)) >= 0 && angle < 0.2)
+		return (color_interp(new_color(obj->color.r, obj->color.g,
+			obj->color.b, 0), new_color(255, 255, 255, 0), angle * 9));
+	d->stop = 0;
 	return (c);
 }

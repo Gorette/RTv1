@@ -27,9 +27,10 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 
 	d->l = -1;
 	c = d->lights > 0 ? new_color(0, 0, 0, 0) :
-		new_color(obj->color.r, obj->color.g, obj->color.b, 0);
+	new_color(obj->color.r, obj->color.g, obj->color.b, 0);
 	while (++(d->l) < d->lights)
 	{
+		d->stop = 0;
 		ld = new_dot(d->light[d->l]->px, d->light[d->l]->py, d->light[d->l]->pz);
 		lo = two_point_vector(ld, inter);
 		test_light(d, d->light[d->l], lo, obj);
@@ -52,6 +53,8 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 			if (ft_strcmp(obj->type, "cylinder") == 0 && i == d->objects - 1)
 				c = diffuse_cylinder(c, inter, obj, d);
 		}
+		if (d->stop != 0)
+			break;
 	}
 	return (c);
 }

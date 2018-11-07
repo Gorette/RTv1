@@ -54,7 +54,7 @@ int		get_object_rad(char *f, int s, t_obj *obj)
 	float	*tab;
 
 	tab = three_values_tab(f, s);
-	if (!(f[(int)tab[4]]) || tab[3] != 1)
+	if (!(f[(int)tab[4]]) || tab[3] != 1 || tab[0] < 0)
 	{
 		free(tab);
 		return (0);

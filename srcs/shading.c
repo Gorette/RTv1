@@ -42,12 +42,8 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 			{
 				if ((d->t[0] > 0 && d->t[0] < dist) || (d->t[1] > 0 &&
 					d->t[1] < dist))
-				{
-					c = new_color(0, 0, 0, 0);
 					break;
-				}
 			}
-			if (d->stop == 0)
 			{
 				if (ft_strcmp(obj->type, "sphere") == 0 && i == d->objects - 1)
 					c = diffuse_sphere(c, inter, obj, d);
@@ -58,6 +54,8 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 				if (!ft_strcmp(obj->type, "cylinder") && i == d->objects - 1)
 					c = diffuse_cylinder(c, inter, obj, d);
 			}
+			if (d->stop != 0)
+				break;
 		}
 	}
 	return (c);

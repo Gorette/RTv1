@@ -36,25 +36,29 @@ t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 		test_light(d, d->light[d->l], lo, obj);
 		dist = find_right_distance(d, inter, ld, lo);
 		i = -1;
-		while (++i <= d->objects - 1)
+		while (++i < d->objects)
 		{
-			if (test_light(d, d->light[d->l], lo, d->obj[i]) != 0)
+			if (test_light(d, d->light[d->l], lo, d->obj[i]) == 1)
 			{
-				if ((d->t[0] < dist && d->t[0] > 0) || (d->t[1] < dist
-					&& d->t[1] > 0))
+				if ((d->t[0] > 0 && d->t[0] < dist) || (d->t[1] > 0 &&
+					d->t[1] < dist))
+				{
+					c = new_color(0, 0, 0, 0);
 					break;
+				}
 			}
-			if (ft_strcmp(obj->type, "sphere") == 0 && i == d->objects - 1)
-				c = diffuse_sphere(c, inter, obj, d);
-			if (ft_strcmp(obj->type, "plane") == 0 && i == d->objects - 1)
-				c = diffuse_plane(c, inter, obj, d);
-			if (ft_strcmp(obj->type, "cone") == 0 && i == d->objects - 1)
-				c = diffuse_cone(c, inter, obj, d);
-			if (ft_strcmp(obj->type, "cylinder") == 0 && i == d->objects - 1)
-				c = diffuse_cylinder(c, inter, obj, d);
+			if (d->stop == 0)
+			{
+				if (ft_strcmp(obj->type, "sphere") == 0 && i == d->objects - 1)
+					c = diffuse_sphere(c, inter, obj, d);
+				if (!ft_strcmp(obj->type, "plane") && i == d->objects - 1)
+					c = diffuse_plane(c, inter, obj, d);
+				if (!ft_strcmp(obj->type, "cone") && i == d->objects - 1)
+					c = diffuse_cone(c, inter, obj, d);
+				if (!ft_strcmp(obj->type, "cylinder") && i == d->objects - 1)
+					c = diffuse_cylinder(c, inter, obj, d);
+			}
 		}
-		if (d->stop != 0)
-			break;
 	}
 	return (c);
 }

@@ -12,6 +12,7 @@ object {
 }
 
 object {
+	shiny
 	type(cone)
 	pos(30, 80, 400)
 	rotation(20, 0)

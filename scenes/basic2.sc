@@ -4,6 +4,7 @@ camera {
 }
 
 object {
+	shiny
 	type(sphere)
 	pos(-1,-1,20)
 	radius(2)
@@ -11,6 +12,7 @@ object {
 }
 
 object {
+	shiny
 	type(sphere)
 	pos(-10,-1,15)
 	radius(3)
@@ -18,6 +20,7 @@ object {
 }
 
 object {
+	shiny
 	type(sphere)
 	pos(-20,-1,10)
 	radius(4)
@@ -32,6 +35,7 @@ object {
 }
 
 object {
+	shiny
 	type(cylinder)
 	pos(5,0,30)
 	radius(2)

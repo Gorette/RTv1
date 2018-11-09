@@ -8,6 +8,7 @@ object {
 	pos(0, 0, 100)
 	radius(10)
 	color(246, 189, 209)
+	shiny
 }
 
 object {
@@ -15,6 +16,7 @@ object {
 	pos(30, -30, 100)
 	radius(10)
 	color(246, 228, 246)
+	shiny
 }
 
 object {
@@ -22,6 +24,7 @@ object {
 	pos(-30, 30, 100)
 	radius(10)
 	color(201, 137, 134)
+	shiny
 }
 
 object {

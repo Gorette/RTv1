@@ -4,6 +4,7 @@ camera {
 }
 
 object {
+	shiny
 	type(sphere)
 	pos(-1,-1,10)
 	radius(2)
@@ -18,6 +19,7 @@ object {
 }
 
 object {
+	shiny
 	type(cone)
 	pos(5,0,30)
 	angle(20)
@@ -26,5 +28,5 @@ object {
 }
 
 light {
-	pos(-0,-0,-100)
+	pos(0,0,-100)
 }

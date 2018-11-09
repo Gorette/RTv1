@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:56:25 by axbal             #+#    #+#             */
-/*   Updated: 2018/09/13 13:21:44 by axbal            ###   ########.fr       */
+/*   Updated: 2018/11/09 16:02:13 by ceugene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int		compare_string_to_values(char *f, int s, t_obj *new)
 {
 	if (ft_strncmp(f + s, "type(", 5) == 0)
 		return (get_object_type(f, s, new));
+	else if (ft_strncmp(f + s, "shiny", 5) == 0)
+		new->shiny = 1;
 	else if (ft_strncmp(f + s, "pos(", 4) == 0)
 		return (get_object_pos(f, s, new));
 	else if (ft_strncmp(f + s, "radius(", 7) == 0)

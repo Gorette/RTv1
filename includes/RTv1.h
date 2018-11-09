@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:05:33 by axbal             #+#    #+#             */
-/*   Updated: 2018/10/03 13:34:09 by axbal            ###   ########.fr       */
+/*   Updated: 2018/11/09 15:57:38 by ceugene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct		s_obj
 	int				angle_c;
 	int				vector_c;
 	int				rotation_c;
+	int				shiny;
 }					t_obj;
 
 typedef struct		s_img

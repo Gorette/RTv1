@@ -121,7 +121,7 @@ int		test_light(t_data *d, t_light *l, t_vec ray, t_obj *obj)
 		ret = light_cyli(d, l, ray, obj);
 	if (ft_strcmp(obj->type, "cone") == 0)
 		ret = light_cone(d, l, ray, obj);
-	if (ret == 1 && (d->t[0] >= 0 || d->t[1] >= 0))
+	if (ret == 1 && (d->t[0] > 0 || d->t[1] > 0))
 		return (1);
 	return (0);
 }

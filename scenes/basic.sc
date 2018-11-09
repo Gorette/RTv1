@@ -1,14 +1,30 @@
 camera {
-	pos(-1,-1,-1)
-	rotation(-1,-1,-1)
+	pos(0,-1,-20)
+	rotation(0,0,10)
 }
 
 object {
 	shiny
 	type(sphere)
-	pos(-1,-1,10)
+	pos(-1,-1,20)
 	radius(2)
-	color(-255,-2,-2)
+	color(200,100,190)
+}
+
+object {
+	shiny
+	type(sphere)
+	pos(-10,-1,15)
+	radius(3)
+	color(110,20,120)
+}
+
+object {
+	shiny
+	type(sphere)
+	pos(-20,-1,10)
+	radius(4)
+	color(125,123,100)
 }
 
 object {
@@ -20,13 +36,13 @@ object {
 
 object {
 	shiny
-	type(cone)
+	type(cylinder)
 	pos(5,0,30)
-	angle(20)
-	rotation(90,45)
+	radius(2)
+	rotation(40,45)
 	color(255,255,0)
 }
 
 light {
-	pos(0,100,-100)
+	pos(30,30,-20)
 }

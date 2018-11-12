@@ -115,6 +115,16 @@ typedef struct		s_data
 	int				stop;
 }					t_data;
 
+typedef struct		s_diffuse
+{
+	t_vec			normale;
+	t_vec			lo;
+	t_vec			a_dot;
+	t_dot			obj_center;
+	t_dot			lc;
+	t_dot			affixe;
+	float			angle;
+}					t_diffuse;
 
 void	ft_fail(char *str, t_data *data);
 int		read_file(t_data *data, char *file);

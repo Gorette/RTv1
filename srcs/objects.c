@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "RTv1.h"
-#include <stdio.h>
 
 void	add_obj(t_data *data, t_obj *obj)
 {
@@ -31,7 +30,6 @@ void	add_obj(t_data *data, t_obj *obj)
 		free(data->obj);
 	data->obj = tmp;
 	data->objects++;
-	printf("L'objet de type %s a bien ete ajoute.\n", obj->type);
 }
 
 int		expected_result(t_obj *obj)
@@ -93,7 +91,6 @@ int		read_object_var(char *f, int s, t_obj *new)
 	}
 	if (f[s] != '}' || expected_result(new) != 1)
 		return (-1);
-	printf("object %s is perfect!\n", new->type);
 	return (1);
 }
 

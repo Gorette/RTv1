@@ -115,6 +115,16 @@ typedef struct		s_data
 	int				stop;
 }					t_data;
 
+typedef struct		s_rtc
+{
+	int				obj_i;
+	int				i;
+	int				j;
+	float			dm;
+	t_obj			*o;
+	float			stamp;
+}					t_rtc;
+
 typedef struct		s_diffuse
 {
 	t_vec			normale;
@@ -155,6 +165,7 @@ t_dot	new_dot(float x, float y, float z);
 t_vec	new_vec(float x, float y, float z);
 t_data	*new_data(void);
 t_color	new_color(int r, int g, int b, int a);
+void	gen_rays(t_data *d);
 t_img	*init_img(t_data *data);
 float	scalar(t_vec *v1, t_vec *v2);
 int		solve_sphere(t_data *d, t_vec ray, t_obj *s);

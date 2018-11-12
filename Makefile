@@ -12,6 +12,7 @@ SRCS =	main.c					\
 		vector.c				\
 		put_pixel.c				\
 		new.c					\
+		rays.c					\
 		quadratic.c				\
 		matrix.c				\
 		math.c					\

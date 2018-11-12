@@ -41,7 +41,6 @@ t_img		*init_img(t_data *data)
 void		let_mlx_loop(t_data *data)
 {
 	mlx_hook(data->win_ptr, 17, 1L << 17, &close_program, data);
-//	mlx_hook(data->win_ptr, 2, 1L << 0, &key_pressed, data);
 	mlx_hook(data->win_ptr, 3, 1L << 1, &key_release, data);
 	mlx_loop_hook(data->mlx_ptr, &refresh_expose, data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->ptr, 0, 0);

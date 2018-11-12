@@ -19,9 +19,9 @@ void	put_pixel_to_image(t_dot d, t_data *dt, char *i, t_color c)
 	px = ((int)d.x * dt->img->bpp) + ((int)d.y * dt->img->s_l);
 	if (d.x >= 0 && d.x <= LA && d.y >= 0 && d.y < HA)
 	{
-		i[px + 0] = (char)c.b;
-		i[px + 1] = (char)c.g;
-		i[px + 2] = (char)c.r;
+		i[px + 0] = (char)ft_clamp(c.b, 0, 255);
+		i[px + 1] = (char)ft_clamp(c.g, 0, 255);
+		i[px + 2] = (char)ft_clamp(c.r, 0, 255);
 		i[px + 3] = (char)0;
 	}
 }

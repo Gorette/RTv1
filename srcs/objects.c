@@ -6,11 +6,11 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:56:25 by axbal             #+#    #+#             */
-/*   Updated: 2018/11/09 16:02:13 by ceugene          ###   ########.fr       */
+/*   Updated: 2018/11/13 13:29:11 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
 void	add_obj(t_data *data, t_obj *obj)
 {

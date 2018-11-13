@@ -6,11 +6,11 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 16:09:35 by axbal             #+#    #+#             */
-/*   Updated: 2018/11/09 16:01:26 by ceugene          ###   ########.fr       */
+/*   Updated: 2018/11/13 13:30:38 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
 int		get_object_type(char *f, int s, t_obj *obj)
 {

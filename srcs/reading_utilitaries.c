@@ -6,13 +6,13 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 16:10:34 by axbal             #+#    #+#             */
-/*   Updated: 2018/10/23 16:10:36 by axbal            ###   ########.fr       */
+/*   Updated: 2018/11/13 13:31:01 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
-float	ft_atof(const char *str)
+float		ft_atof(const char *str)
 {
 	int		s;
 	int		virgule;
@@ -25,7 +25,7 @@ float	ft_atof(const char *str)
 	virgule = 0;
 	while (str[s] == '\f' || str[s] == '\n' || str[s] == ' '
 		|| str[s] == '\t' || str[s] == '\r' || str[s] == '\v')
-			s++;
+		s++;
 	if (str[s] == '-')
 		levier = -1;
 	if (str[s] == '-' || str[s] == '+')
@@ -41,7 +41,7 @@ float	ft_atof(const char *str)
 	return (result / levier);
 }
 
-int		ft_increase_file(char **file, char *line)
+int			ft_increase_file(char **file, char *line)
 {
 	char	*copy;
 
@@ -92,7 +92,7 @@ char		*start_reading(char *str)
 	return (file);
 }
 
-int		get_object_rot(char *f, int s, t_obj *obj)
+int			get_object_rot(char *f, int s, t_obj *obj)
 {
 	float	*tab;
 
@@ -109,7 +109,7 @@ int		get_object_rot(char *f, int s, t_obj *obj)
 	return (1);
 }
 
-int		get_object_color(char *f, int s, t_obj *obj)
+int			get_object_color(char *f, int s, t_obj *obj)
 {
 	float	*tab;
 
@@ -119,9 +119,9 @@ int		get_object_color(char *f, int s, t_obj *obj)
 		free(tab);
 		return (0);
 	}
-	if (tab[0] >= 0  && tab[0] <= 255 && tab[1] >= 0  && tab[1] <= 255
+	if (tab[0] >= 0 && tab[0] <= 255 && tab[1] >= 0 && tab[1] <= 255
 	&& tab[2] >= 0 && tab[2] <= 255)
-	obj->color = new_color((int)tab[0], (int)tab[1], (int)tab[2], 0);
+		obj->color = new_color((int)tab[0], (int)tab[1], (int)tab[2], 0);
 	free(tab);
 	return (1);
 }

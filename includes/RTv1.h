@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:05:33 by axbal             #+#    #+#             */
-/*   Updated: 2018/11/09 15:57:38 by ceugene          ###   ########.fr       */
+/*   Updated: 2018/11/13 13:26:30 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,56 +145,56 @@ typedef struct		s_sec_r
 	t_dot			inter;
 }					t_sec_r;
 
-void	ft_fail(char *str, t_data *data);
-int		read_file(t_data *data, char *file);
-float	ft_atof(const char *str);
-float	*three_values_tab(char *f, int s);
-int		read_light(t_data *data, char *file, int select);
-char	*word_return(char *str, int select);
-int		read_camera(t_data *data, char *file, int select);
-int		read_object(t_data *d, char *f, int s);
-int		get_object_type(char *f, int s, t_obj *obj);
-int		get_object_pos(char *f, int s, t_obj *obj);
-int		get_object_rad(char *f, int s, t_obj *obj);
-int		get_object_angle(char *f, int s, t_obj *obj);
-int		get_object_rot(char *f, int s, t_obj *obj);
-int		get_object_vec(char *f, int s, t_obj *obj);
-int		get_object_color(char *f, int s, t_obj *obj);
-t_obj	*create_object(t_data *data);
-int		key_release(int key, void *d);
-int		ft_increase_file(char **file, char *line);
-char	*start_reading(char *str);
-int		close_program(t_data *d);
-int		refresh_expose(t_data *d);
-void	start_raytracing(t_data *d);
-t_vec	two_point_vector(t_dot p1, t_dot p2);
-void	norm_vec(t_vec *to_normalize);
-void	put_pixel_to_image(t_dot d, t_data *data, char *img, t_color c);
-t_dot	new_dot(float x, float y, float z);
-t_vec	new_vec(float x, float y, float z);
-t_data	*new_data(void);
-t_color	new_color(int r, int g, int b, int a);
-void	gen_rays(t_data *d);
-t_img	*init_img(t_data *data);
-float	scalar(t_vec *v1, t_vec *v2);
-int		solve_sphere(t_data *d, t_vec ray, t_obj *s);
-int		solve_plane(t_data *d, t_vec ray, t_obj *p);
-int		solve_cyli(t_data *d, t_vec ray, t_obj *o);
-int		solve_cone(t_data *d, t_vec ray, t_obj *o);
-t_vec	trans_vec(t_vec vec, float tx, float ty, float tz);
-t_vec	rot_vec(t_vec ray, float rx, float ry, float rz);
-float	degree_to_radian(float degree);
-float	ft_clamp(float to_clamp, float min, float max);
-t_dot	get_hitpoint(t_vec vector, float d, t_data *data);
-t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj);
-int		test_object(t_data *d, t_vec ray, t_obj *obj);
-int		test_light(t_data *d, t_light *l, t_vec ray, t_obj *obj);
-float	two_point_dist(t_dot p1, t_dot p2);
-t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *obj, t_data *d);
-t_color	diffuse_cone(t_color c, t_dot inter, t_obj *obj, t_data *d);
-t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d);
-t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *obj, t_data *d);
-float	compare_vectors(t_vec v1, t_vec v2);
-t_color		color_interp(t_color c1, t_color c2, float factor);
+void				ft_fail(char *str, t_data *data);
+int					read_file(t_data *data, char *file);
+float				ft_atof(const char *str);
+float				*three_values_tab(char *f, int s);
+int					read_light(t_data *data, char *file, int select);
+char				*word_return(char *str, int select);
+int					read_camera(t_data *data, char *file, int select);
+int					read_object(t_data *d, char *f, int s);
+int					get_object_type(char *f, int s, t_obj *obj);
+int					get_object_pos(char *f, int s, t_obj *obj);
+int					get_object_rad(char *f, int s, t_obj *obj);
+int					get_object_angle(char *f, int s, t_obj *obj);
+int					get_object_rot(char *f, int s, t_obj *obj);
+int					get_object_vec(char *f, int s, t_obj *obj);
+int					get_object_color(char *f, int s, t_obj *obj);
+t_obj				*create_object(t_data *data);
+int					key_release(int key, void *d);
+int					ft_increase_file(char **file, char *line);
+char				*start_reading(char *str);
+int					close_program(t_data *d);
+int					refresh_expose(t_data *d);
+void				start_raytracing(t_data *d);
+t_vec				two_point_vector(t_dot p1, t_dot p2);
+void				norm_vec(t_vec *to_normalize);
+void				put_pixel_to_image(t_dot o, t_data *d, char *i, t_color c);
+t_dot				new_dot(float x, float y, float z);
+t_vec				new_vec(float x, float y, float z);
+t_data				*new_data(void);
+t_color				new_color(int r, int g, int b, int a);
+void				gen_rays(t_data *d);
+t_img				*init_img(t_data *data);
+float				scalar(t_vec *v1, t_vec *v2);
+int					solve_sphere(t_data *d, t_vec ray, t_obj *s);
+int					solve_plane(t_data *d, t_vec ray, t_obj *p);
+int					solve_cyli(t_data *d, t_vec ray, t_obj *o);
+int					solve_cone(t_data *d, t_vec ray, t_obj *o);
+t_vec				trans_vec(t_vec vec, float tx, float ty, float tz);
+t_vec				rot_vec(t_vec ray, float rx, float ry, float rz);
+float				degree_to_radian(float degree);
+float				ft_clamp(float to_clamp, float min, float max);
+t_dot				get_hitpoint(t_vec vector, float d, t_data *data);
+t_color				secondary_rays(t_dot inter, t_data *d, t_obj *obj);
+int					test_object(t_data *d, t_vec ray, t_obj *obj);
+int					test_light(t_data *d, t_light *l, t_vec ray, t_obj *obj);
+float				two_point_dist(t_dot p1, t_dot p2);
+t_color				diffuse_cylinder(t_color c, t_dot i, t_obj *obj, t_data *d);
+t_color				diffuse_cone(t_color c, t_dot i, t_obj *obj, t_data *d);
+t_color				diffuse_plane(t_color c, t_dot i, t_obj *obj, t_data *d);
+t_color				diffuse_sphere(t_color c, t_dot i, t_obj *obj, t_data *d);
+float				compare_vectors(t_vec v1, t_vec v2);
+t_color				color_interp(t_color c1, t_color c2, float factor);
 
 #endif

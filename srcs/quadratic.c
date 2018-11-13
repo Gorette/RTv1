@@ -6,11 +6,11 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 14:44:53 by axbal             #+#    #+#             */
-/*   Updated: 2018/09/14 13:06:09 by axbal            ###   ########.fr       */
+/*   Updated: 2018/11/13 13:29:33 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
 int		solve_cyli(t_data *d, t_vec ray, t_obj *o)
 {

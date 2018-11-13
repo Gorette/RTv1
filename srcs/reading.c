@@ -6,11 +6,11 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 16:09:59 by axbal             #+#    #+#             */
-/*   Updated: 2018/11/09 15:57:54 by ceugene          ###   ########.fr       */
+/*   Updated: 2018/11/13 13:30:51 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
 char	*word_return(char *str, int select)
 {

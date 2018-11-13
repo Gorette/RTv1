@@ -1,6 +1,18 @@
-#include "RTv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   new.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/13 13:04:35 by axbal             #+#    #+#             */
+/*   Updated: 2018/11/13 13:28:55 by axbal            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_dot	new_dot(float x, float y, float z)
+#include "rtv1.h"
+
+t_dot		new_dot(float x, float y, float z)
 {
 	t_dot	d;
 
@@ -10,7 +22,7 @@ t_dot	new_dot(float x, float y, float z)
 	return (d);
 }
 
-t_vec	new_vec(float x, float y, float z)
+t_vec		new_vec(float x, float y, float z)
 {
 	t_vec	v;
 
@@ -54,7 +66,7 @@ t_data		*new_data(void)
 	return (new);
 }
 
-t_obj	*create_object(t_data *data)
+t_obj		*create_object(t_data *data)
 {
 	t_obj	*new;
 

@@ -1,7 +1,18 @@
-#include "RTv1.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shading.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/13 13:17:13 by axbal             #+#    #+#             */
+/*   Updated: 2018/11/13 13:31:13 by axbal            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-float	find_right_distance(t_data *d, t_dot inter, t_dot light, t_vec vec)
+#include "rtv1.h"
+
+float		find_right_distance(t_data *d, t_dot inter, t_dot light, t_vec vec)
 {
 	float	dist;
 	float	sum1;
@@ -44,17 +55,17 @@ t_color		find_c(t_sec_r s, t_color c, t_obj *obj, t_data *d)
 		{
 			if ((d->t[0] > 0 && d->t[0] < s.dist) || (d->t[1] > 0 &&
 				d->t[1] < s.dist))
-				break;
+				break ;
 		}
 		if (s.i == d->objects - 1)
 			c = find_diffuse(c, s.inter, obj, d);
 		if (d->stop != 0)
-			break;
+			break ;
 	}
 	return (c);
 }
 
-t_color	secondary_rays(t_dot inter, t_data *d, t_obj *obj)
+t_color		secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 {
 	t_sec_r	s;
 	t_color	c;

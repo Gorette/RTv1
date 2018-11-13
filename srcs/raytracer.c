@@ -1,4 +1,16 @@
-#include "RTv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raytracer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/13 13:16:31 by axbal             #+#    #+#             */
+/*   Updated: 2018/11/13 13:29:54 by axbal            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
 
 int		test_object(t_data *d, t_vec ray, t_obj *obj)
 {
@@ -20,7 +32,7 @@ int		test_object(t_data *d, t_vec ray, t_obj *obj)
 	return (0);
 }
 
-t_rtc	ft_raytracer(t_rtc	r, t_data *d)
+t_rtc	ft_raytracer(t_rtc r, t_data *d)
 {
 	if (test_object(d, d->rays[r.i][r.j], d->obj[r.obj_i]) > 0)
 	{

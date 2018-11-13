@@ -1,4 +1,16 @@
-#include "RTv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/13 13:02:44 by axbal             #+#    #+#             */
+/*   Updated: 2018/11/13 13:28:36 by axbal            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
 
 float		ft_clamp(float to_clamp, float min, float max)
 {
@@ -9,7 +21,7 @@ float		ft_clamp(float to_clamp, float min, float max)
 	return (to_clamp);
 }
 
-float	two_point_dist(t_dot p1, t_dot p2)
+float		two_point_dist(t_dot p1, t_dot p2)
 {
 	float	dist;
 
@@ -42,7 +54,7 @@ float		compare_vectors(t_vec v1, t_vec v2)
 	return (sum);
 }
 
-float	degree_to_radian(float degree)
+float		degree_to_radian(float degree)
 {
 	return (degree * M_PI / 180.0);
 }

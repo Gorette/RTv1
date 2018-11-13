@@ -6,13 +6,13 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 16:05:31 by axbal             #+#    #+#             */
-/*   Updated: 2018/11/09 16:11:06 by ceugene          ###   ########.fr       */
+/*   Updated: 2018/11/13 13:27:44 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
-t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *o, t_data *d)
+t_color		diffuse_sphere(t_color c, t_dot inter, t_obj *o, t_data *d)
 {
 	t_diffuse	s;
 
@@ -29,13 +29,15 @@ t_color	diffuse_sphere(t_color c, t_dot inter, t_obj *o, t_data *d)
 	c.b += (int)ft_clamp(((o->color.b / d->lights) * s.angle), 0, o->color.b);
 	if (o->shiny && (s.angle = compare_vectors(s.normale, s.lo)) >= 0
 		&& s.angle < 0.08)
+	{
 		return (color_interp(new_color(o->color.r, o->color.g, o->color.b, 0),
 			new_color(255, 255, 255, 0), s.angle * 9));
+	}
 	d->stop = 0;
 	return (c);
 }
 
-t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d)
+t_color		diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d)
 {
 	t_diffuse	s;
 
@@ -53,7 +55,15 @@ t_color	diffuse_plane(t_color c, t_dot inter, t_obj *obj, t_data *d)
 	return (c);
 }
 
-t_color	diffuse_cone(t_color c, t_dot inter, t_obj *o, t_data *d)
+t_color		apply_color(t_color c, t_obj *o, t_data *d, float angle)
+{
+	c.r += ft_clamp(((o->color.r / d->lights) * angle), 0, o->color.r);
+	c.g += ft_clamp(((o->color.g / d->lights) * angle), 0, o->color.g);
+	c.b += ft_clamp(((o->color.b / d->lights) * angle), 0, o->color.b);
+	return (c);
+}
+
+t_color		diffuse_cone(t_color c, t_dot inter, t_obj *o, t_data *d)
 {
 	t_diffuse	s;
 
@@ -71,18 +81,18 @@ t_color	diffuse_cone(t_color c, t_dot inter, t_obj *o, t_data *d)
 	s.lo = two_point_vector(s.affixe, new_dot(s.lo.x, s.lo.y, s.lo.z));
 	norm_vec(&(s.lo));
 	s.angle = fabs(scalar(&(s.normale), &(s.lo)));
-	c.r += ft_clamp(((o->color.r / d->lights) * s.angle), 0, o->color.r);
-	c.g += ft_clamp(((o->color.g / d->lights) * s.angle), 0, o->color.g);
-	c.b += ft_clamp(((o->color.b / d->lights) * s.angle), 0, o->color.b);
+	c = apply_color(c, o, d, s.angle);
 	if (o->shiny && (s.angle = compare_vectors(s.normale, s.lo)) >= 0
 		&& s.angle < 0.08)
+	{
 		return (color_interp(new_color(o->color.r, o->color.g, o->color.b, 0),
 			new_color(255, 255, 255, 0), s.angle * 9));
+	}
 	d->stop = 0;
 	return (c);
 }
 
-t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *o, t_data *d)
+t_color		diffuse_cylinder(t_color c, t_dot inter, t_obj *o, t_data *d)
 {
 	t_diffuse	s;
 
@@ -100,13 +110,13 @@ t_color	diffuse_cylinder(t_color c, t_dot inter, t_obj *o, t_data *d)
 	s.lo = two_point_vector(s.affixe, new_dot(s.lo.x, s.lo.y, s.lo.z));
 	norm_vec(&(s.lo));
 	s.angle = fabs(scalar(&(s.normale), &(s.lo)));
-	c.r += ft_clamp(((o->color.r / d->lights) * s.angle), 0, o->color.r);
-	c.g += ft_clamp(((o->color.g / d->lights) * s.angle), 0, o->color.g);
-	c.b += ft_clamp(((o->color.b / d->lights) * s.angle), 0, o->color.b);
+	c = apply_color(c, o, d, s.angle);
 	if (o->shiny && (s.angle = compare_vectors(s.normale, s.lo)) >= 0
 		&& s.angle < 0.08)
+	{
 		return (color_interp(new_color(o->color.r, o->color.g, o->color.b, 0),
 			new_color(255, 255, 255, 0), s.angle * 9));
+	}
 	d->stop = 0;
 	return (c);
 }

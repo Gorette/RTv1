@@ -6,11 +6,11 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 10:27:47 by axbal             #+#    #+#             */
-/*   Updated: 2018/08/16 12:24:22 by axbal            ###   ########.fr       */
+/*   Updated: 2018/11/13 13:30:22 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
 void	copy_lights(t_data *data, t_light **tmp)
 {

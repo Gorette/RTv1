@@ -6,11 +6,11 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 14:44:53 by axbal             #+#    #+#             */
-/*   Updated: 2018/11/09 17:12:06 by ceugene          ###   ########.fr       */
+/*   Updated: 2018/11/13 13:28:14 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
 int		light_cyli(t_data *d, t_light *l, t_vec ray, t_obj *o)
 {

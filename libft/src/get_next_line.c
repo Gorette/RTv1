@@ -6,7 +6,7 @@
 /*   By: ceugene <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 12:19:58 by ceugene           #+#    #+#             */
-/*   Updated: 2018/03/12 12:38:14 by ceugene          ###   ########.fr       */
+/*   Updated: 2018/11/13 13:21:58 by axbal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,5 @@ int		get_next_line(const int fd, char **line)
 	if (stock && ft_strlen(stock) > 0)
 		return (ft_fill_line(line, &stock, 0, 0));
 	free(*line);
-//	ft_bzero(*line, BUFF_SIZE);
 	return (0);
 }

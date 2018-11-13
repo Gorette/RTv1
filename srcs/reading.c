@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 16:09:59 by axbal             #+#    #+#             */
-/*   Updated: 2018/11/13 13:30:51 by axbal            ###   ########.fr       */
+/*   Updated: 2018/11/13 13:44:20 by ceugene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int		read_file(t_data *data, char *file)
 			select += ft_strlen(object);
 			read_new_object(data, object, file, select);
 			free(object);
+			while (file[select] && file[select] != '}')
+				select++;
 		}
 		select++;
 	}

@@ -6,7 +6,7 @@
 /*   By: axbal <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 14:44:53 by axbal             #+#    #+#             */
-/*   Updated: 2018/11/13 13:29:33 by axbal            ###   ########.fr       */
+/*   Updated: 2018/11/13 15:25:12 by ceugene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int		solve_plane(t_data *d, t_vec ray, t_obj *p)
 	if (scalar(p->v, &ray) != 0)
 	{
 		q = -(p->v->x * p->px + p->v->y * p->py + p->v->z * p->pz);
-		d->t[0] = (-(p->v->x * d->cam->px) - p->v->y * d->cam->py -
-			p->v->z * d->cam->pz - q) / (ray.x * p->v->x + ray.y * p->v->y +
-				ray.z * p->v->z);
+		d->t[0] = (-(p->v->x * d->cam->px) - p->v->y * d->cam->py
+			- p->v->z * d->cam->pz - q) / (ray.x * p->v->x + ray.y * p->v->y
+				+ ray.z * p->v->z);
 		if (d->t[0] < 0)
 			return (-1);
 		return (1);

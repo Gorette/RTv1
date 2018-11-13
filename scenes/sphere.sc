@@ -6,10 +6,11 @@ camera {
 object {
 	type(sphere)
 	pos(0,0,50)
-	radius(10)
-	color(128,172,224)
+	radius(25)
+	color(110,20,24)
+	shiny
 }
 
 light {
-	pos(100,50,50)
+	pos(90,0,-50)
 }

@@ -8,9 +8,9 @@ object {
 	pos(0,0,30)
 	radius(10)
 	rotation(90,0)
-	color(237,148,156)
+	color(23,110,16)
 }
 
 light {
-	pos(-80,0,20)
+	pos(50,0,-20)
 }

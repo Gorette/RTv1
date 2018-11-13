@@ -29,7 +29,7 @@ object {
 
 object {
 	type(plane)
-	pos(0,-1,200)
+	pos(0,0,200)
 	vector(-10,-10,-10)
 	color(125,149,238)
 }
@@ -39,10 +39,18 @@ object {
 	type(cylinder)
 	pos(5,0,30)
 	radius(2)
-	rotation(40,45)
+	rotation(20,-60)
 	color(255,255,0)
 }
 
+object {
+	type(cone)
+	pos(20, 5, 50)
+	angle(5)
+	rotation(60, 20)
+	color(212, 164, 149)
+}
+
 light {
-	pos(30,30,-20)
+	pos(-30,-30,-20)
 }

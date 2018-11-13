@@ -6,11 +6,11 @@ camera {
 object {
 	type(cone)
 	pos(0,0,100)
-	angle(5)
+	angle(30)
 	rotation(90,0)
 	color(127,243,136)
 }
 
 light {
-	pos(-50,0,100)
+	pos(100,0,-50)
 }

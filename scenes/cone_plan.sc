@@ -4,6 +4,7 @@ camera {
 }
 
 object {
+	shiny
 	type(cone)
 	pos(0, 0, 30)
 	rotation(90, 0)

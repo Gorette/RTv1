@@ -74,9 +74,9 @@ t_color		secondary_rays(t_dot inter, t_data *d, t_obj *obj)
 	d->l = -1;
 	c = d->lights > 0 ? new_color(0, 0, 0, 0) :
 	new_color(obj->color.r, obj->color.g, obj->color.b, 0);
-	while (++(d->l) < d->lights)
+	d->stop = 0;
+	while (++(d->l) < d->lights && d->stop == 0)
 	{
-		d->stop = 0;
 		s.ld = new_dot(d->light[d->l]->px, d->light[d->l]->py,
 			d->light[d->l]->pz);
 		s.lo = two_point_vector(s.ld, s.inter);

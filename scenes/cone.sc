@@ -9,6 +9,7 @@ object {
 	angle(30)
 	rotation(90,0)
 	color(127,243,136)
+	shiny
 }
 
 light {

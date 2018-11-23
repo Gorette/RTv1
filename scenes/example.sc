@@ -8,6 +8,7 @@ object {
 	pos(-5,-5,30)
 	radius(10)
 	color(255,0,0)
+	shiny
 }
 
 object {
@@ -16,6 +17,7 @@ object {
 	radius(6)
 	rotation(90,-45)
 	color(0,255,0)
+	shiny
 }
 
 object {
@@ -24,6 +26,7 @@ object {
 	angle(20)
 	rotation(90,45)
 	color(255,255,0)
+	shiny
 }
 
 object {

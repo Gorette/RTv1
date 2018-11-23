@@ -1,6 +1,6 @@
 camera {
 	pos(0, 0, -100)
-	rotation(0, 0, 1)
+	rotation(0, -1, 1)
 }
 
 object {
@@ -21,5 +21,5 @@ object {
 }
 
 light {
-	pos(500, 10, 0)
+	pos(500, 10, -10)
 }

@@ -44,6 +44,7 @@ object {
 }
 
 object {
+	shiny
 	type(cone)
 	pos(20, 5, 50)
 	angle(5)

@@ -7,7 +7,7 @@ object {
 	type(sphere)
 	pos(0,0,50)
 	radius(25)
-	color(110,20,24)
+	color(110,80,164)
 	shiny
 }
 
